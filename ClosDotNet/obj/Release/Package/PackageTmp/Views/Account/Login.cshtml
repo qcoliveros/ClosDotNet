@@ -1,0 +1,98 @@
+﻿@using ClosDotNet.Resources.Resources;
+
+@model ClosDotNet.Models.LoginViewModel
+
+@{
+    ViewBag.Title = LoginResources.Title;
+}
+
+<div class="row">
+    <div class="text-center">
+        <div id="carousel-login-top" class="carousel" data-ride="carousel" data-interval="8000">
+            <div class="carousel-inner" role="listbox">
+                <div class="item active">
+                    <img src="~/Resources/Images/login_home1.jpg" class="img-responsive">
+                </div>
+                <div class="item">
+                    <img src="~/Resources/Images/login_home2.jpg" class="img-responsive">
+                </div>
+                <div class="item">
+                    <img src="~/Resources/Images/login_home3.jpg" class="img-responsive">
+                </div>
+                <div class="item">
+                    <img src="~/Resources/Images/login_home4.jpg" class="img-responsive">
+                </div>
+                <div class="item">
+                    <img src="~/Resources/Images/login_home5.jpg" class="img-responsive">
+                </div>
+            </div>
+        </div>
+        <div class="login-panel hidden-xs login-panel">
+            <div class="col-md-12">
+                <section id="loginForm">
+                    @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <div class="text-right login-panel-welcome">
+                            <strong>@LoginResources.LabelWelcomeTo</strong>
+                        </div>
+                        <div class="text-right login-panel-system">
+                            <strong>@LoginResources.SystemName</strong>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-xs-5 pull-right text-right login-panel-form">
+                                @Html.TextBoxFor(m => m.UserName, new { @class = "form-control login-control", @placeholder = @LoginResources.LabelLoginId })
+                                @Html.ValidationMessageFor(m => m.UserName, "", new { @class = "text-danger-small" })
+                                <br />
+                                @Html.PasswordFor(m => m.Password, new { @class = "form-control login-control", @placeholder = @LoginResources.LabelPassword })
+                                @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger-small" })
+                                <br />
+                                <button type="submit" class="btn btn-default">
+                                    @CommonResources.ButtonSignin&nbsp;&nbsp;
+                                    <span class="glyphicon glyphicon-arrow-right"></span>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="pull-right login-panel-reminder">
+                            <strong>@LoginResources.Reminder</strong>&nbsp;@LoginResources.ReminderInfo
+                        </div>
+                    }
+                </section>
+            </div>
+        </div>
+        <div class="carousel-spacer">
+            <img src="~/Resources/Images/login_divider.jpg">
+        </div>
+        <div id="carousel-login-bottom" class="carousel slide" data-ride="carousel" data-interval="6000">
+            <div class="carousel-inner" role="listbox">
+                <div class="item active">
+                    <img src="~/Resources/Images/login_banner1.jpg" class="img-responsive">
+                </div>
+                <div class="item">
+                    <img src="~/Resources/Images/login_banner2.jpg" class="img-responsive">
+                </div>
+                <div class="item">
+                    <img src="~/Resources/Images/login_banner3.jpg" class="img-responsive">
+                </div>
+                <div class="item">
+                    <img src="~/Resources/Images/login_banner4.jpg" class="img-responsive">
+                </div>
+                <div class="item">
+                    <img src="~/Resources/Images/login_banner5.jpg" class="img-responsive">
+                </div>
+                <div class="item">
+                    <img src="~/Resources/Images/login_banner6.jpg" class="img-responsive">
+                </div>
+            </div>
+            <div class="proprietary">
+                @LoginResources.Proprietary1<br />
+                @LoginResources.Proprietary2<br />
+                @LoginResources.Proprietary3<br />
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

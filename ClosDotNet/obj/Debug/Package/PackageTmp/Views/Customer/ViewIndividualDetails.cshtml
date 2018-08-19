@@ -1,0 +1,316 @@
+﻿@using ClosDotNet.Resources.Resources;
+
+@model ClosDotNet.Models.IndividualCustomerViewModel
+
+@{
+    ViewBag.Title = CustomerResources.TitleIndividualDetails;
+    ViewBag.ActiveMenu = "Customer";
+    ViewBag.ActiveSubMenu = "CustomerDetails";
+}
+
+@using (Html.BeginForm("SaveIndividualCustomer", "Customer", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.Partial("Message")
+    <fieldset>
+        <legend>@CustomerResources.TitleIndividualDetails</legend>
+
+        <section id="customerForm">
+            <table class="table table-bordered table-condensed">
+                <tr>
+                    <td class="fieldname">
+                        @Html.LabelFor(m => m.CifNumber, new { @class = "control-label" })
+                    </td>
+                    <td colspan="3">
+                        @Html.DisplayFor(m => m.CifNumber)
+                    </td>
+                </tr>
+                <tr>
+                    <td class="fieldname">
+                        <label class="control-label">@CustomerResources.LabelDetailId</label>
+                    </td>
+                    <td colspan="3">
+                        @Html.Partial("_IdDetail", Model)
+                    </td>
+                </tr>
+                <tr>
+                    <td class="fieldname">
+                        @Html.LabelFor(m => m.Classification, new { @class = "control-label" })
+                    </td>
+                    <td class="fieldvalue">
+                        @Html.DropDownListFor(
+                            m => m.Classification,
+                            (IList<SelectListItem>)ViewBag.ClassificationList,
+                            CommonResources.OptionPleaseSelect,
+                            new { @class = "form-control input-sm" })
+                        @Html.ValidationMessageFor(m => m.Classification, "", new { @class = "text-danger" })
+                    </td>
+                    <td class="fieldname">
+                        @Html.LabelFor(m => m.WithBankSinceDate, new { @class = "control-label" })
+                    </td>
+                    <td class="fieldvalue">
+                        @Html.TextBoxFor(m => m.WithBankSinceDate, new { @class = "form-control input-sm datepicker" })
+                        @Html.ValidationMessageFor(m => m.WithBankSinceDate, "", new { @class = "text-danger" })
+                    </td>
+                </tr>
+                <tr>
+                    <td class="fieldname">
+                        @Html.LabelFor(m => m.FirstCreditGrantedDate, new { @class = "control-label" })
+                    </td>
+                    <td>
+                        @Html.TextBoxFor(m => m.FirstCreditGrantedDate, new { @class = "form-control input-sm datepicker" })
+                        @Html.ValidationMessageFor(m => m.FirstCreditGrantedDate, "", new { @class = "text-danger" })
+                    </td>
+                    <td class="fieldname">
+                        @Html.LabelFor(m => m.AccountOpenedDate, new { @class = "control-label" })
+                    </td>
+                    <td>
+                        @Html.TextBoxFor(m => m.AccountOpenedDate, new { @class = "form-control input-sm datepicker" })
+                        @Html.ValidationMessageFor(m => m.AccountOpenedDate, "", new { @class = "text-danger" })
+                    </td>
+                </tr>
+                <tr>
+                    <td class="fieldname">
+                        @Html.LabelFor(m => m.RelationshipSince, new { @class = "control-label" })
+                    </td>
+                    <td>
+                        @Html.TextBoxFor(m => m.RelationshipSince, new { @class = "form-control input-sm yearpicker" })
+                        @Html.ValidationMessageFor(m => m.RelationshipSince, "", new { @class = "text-danger" })
+                    </td>
+                    <td class="fieldname">
+                        @Html.LabelFor(m => m.FacilityGrantedDate, new { @class = "control-label" })
+                    </td>
+                    <td>
+                        @Html.TextBoxFor(m => m.FacilityGrantedDate, new { @class = "form-control input-sm datepicker" })
+                        @Html.ValidationMessageFor(m => m.FacilityGrantedDate, "", new { @class = "text-danger" })
+                    </td>
+                </tr>
+            </table>
+
+            <table class="table table-bordered table-condensed">
+                <thead>
+                    <tr>
+                        <th width="20%">&nbsp;</th>
+                        <th width="30%">@CustomerResources.LabelDetailName</th>
+                        <th colspan="2">@CustomerResources.LabelDetailPreviousName</th>
+                    </tr>
+                </thead>
+                <tr>
+                    <td class="fieldname">
+                        @Html.LabelFor(m => m.Salutation, new { @class = "control-label" })
+                    </td>
+                    <td>
+                        @Html.DropDownListFor(
+                            m => m.Salutation,
+                            (IList<SelectListItem>)ViewBag.SalutationList,
+                            CommonResources.OptionPleaseSelect,
+                            new { @class = "form-control input-sm" })
+                        @Html.ValidationMessageFor(m => m.Salutation, "", new { @class = "text-danger" })
+                    </td>
+                    <td colspan="2">
+                        @Html.DropDownListFor(
+                            m => m.PreviousSalutation,
+                            (IList<SelectListItem>)ViewBag.SalutationList,
+                            CommonResources.OptionPleaseSelect,
+                            new { @class = "form-control input-sm" })
+                        @Html.ValidationMessageFor(m => m.PreviousSalutation, "", new { @class = "text-danger" })
+                    </td>
+                </tr>
+                <tr>
+                    <td class="fieldname">
+                        <label class="control-label">@CustomerResources.LabelDetailNameLine1</label>
+                    </td>
+                    <td>
+                        @Html.TextBoxFor(m => m.CustomerName, new { @class = "form-control input-sm" })
+                        @Html.ValidationMessageFor(m => m.CustomerName, "", new { @class = "text-danger" })
+                    </td>
+                    <td colspan="2">
+                        @Html.TextBoxFor(m => m.PreviousCustomerName, new { @class = "form-control input-sm" })
+                        @Html.ValidationMessageFor(m => m.PreviousCustomerName, "", new { @class = "text-danger" })
+                    </td>
+                </tr>
+            </table>
+
+            <table class="table table-bordered table-condensed">
+                <tr>
+                    <td class="fieldname">
+                        @Html.LabelFor(m => m.Gender, new { @class = "control-label" })
+                    </td>
+                    <td class="fieldvalue">
+                        @Html.DropDownListFor(
+                            m => m.Gender,
+                            (IList<SelectListItem>)ViewBag.GenderList,
+                            CommonResources.OptionPleaseSelect,
+                            new { @class = "form-control input-sm" })
+                        @Html.ValidationMessageFor(m => m.Gender, "", new { @class = "text-danger" })
+                    </td>
+                    <td class="fieldname">
+                        @Html.LabelFor(m => m.MaritalStatus, new { @class = "control-label" })
+                    </td>
+                    <td class="fieldvalue">
+                        @Html.DropDownListFor(
+                            m => m.MaritalStatus,
+                            (IList<SelectListItem>)ViewBag.MaritalStatusList,
+                            CommonResources.OptionPleaseSelect,
+                            new { @class = "form-control input-sm" })
+                        @Html.ValidationMessageFor(m => m.MaritalStatus, "", new { @class = "text-danger" })
+                    </td>
+                </tr>
+                <tr>
+                    <td class="fieldname">
+                        @Html.LabelFor(m => m.BirthDate, new { @class = "control-label" })
+                    </td>
+                    <td>
+                        @Html.TextBoxFor(m => m.BirthDate, new { @class = "form-control input-sm datepicker" })
+                        @Html.ValidationMessageFor(m => m.BirthDate, "", new { @class = "text-danger" })
+                    </td>
+                    <td class="fieldname">
+                        @Html.LabelFor(m => m.Age, new { @class = "control-label" })
+                    </td>
+                    <td>
+                        @Html.DisplayFor(m => m.Age)
+                    </td>
+                </tr>
+                <tr>
+                    <td class="fieldname">
+                        @Html.LabelFor(m => m.DependentCount, new { @class = "control-label" })
+                    </td>
+                    <td>
+                        @Html.TextBoxFor(m => m.DependentCount, new { @class = "form-control input-sm" })
+                        @Html.ValidationMessageFor(m => m.DependentCount, "", new { @class = "text-danger" })
+                    </td>
+                    <td class="fieldname">
+                        @Html.LabelFor(m => m.Nationality, new { @class = "control-label" })
+                    </td>
+                    <td>
+                        @Html.DropDownListFor(
+                            m => m.Nationality,
+                            (IList<SelectListItem>)ViewBag.CountryList,
+                            CommonResources.OptionPleaseSelect,
+                            new { @class = "form-control input-sm" })
+                        @Html.ValidationMessageFor(m => m.Nationality, "", new { @class = "text-danger" })
+                    </td>
+                </tr>
+                <tr>
+                    <td class="fieldname">
+                        @Html.LabelFor(m => m.ResidentCountry, new { @class = "control-label" })
+                    </td>
+                    <td>
+                        @Html.DropDownListFor(
+                            m => m.ResidentCountry,
+                            (IList<SelectListItem>)ViewBag.CountryList,
+                            CommonResources.OptionPleaseSelect,
+                            new { @class = "form-control input-sm" })
+                        @Html.ValidationMessageFor(m => m.ResidentCountry, "", new { @class = "text-danger" })
+                    </td>
+                    <td class="fieldname">
+                        @Html.LabelFor(m => m.PermanentResidentInd, new { @class = "control-label" })
+                    </td>
+                    <td>
+                        @Html.RadioButtonFor(m => m.PermanentResidentInd, "Y") @CommonResources.OptionYes
+                        @Html.RadioButtonFor(m => m.PermanentResidentInd, "N") @CommonResources.OptionNo <br />
+                        @Html.ValidationMessageFor(m => m.PermanentResidentInd, "", new { @class = "text-danger" })
+                    </td>
+                </tr>
+                <tr>
+                    <td class="fieldname">
+                        @Html.LabelFor(m => m.Race, new { @class = "control-label" })
+                    </td>
+                    <td>
+                        @Html.DropDownListFor(
+                            m => m.Race,
+                            (IList<SelectListItem>)ViewBag.RaceList,
+                            CommonResources.OptionPleaseSelect,
+                            new { @class = "form-control input-sm" })
+                        @Html.ValidationMessageFor(m => m.Race, "", new { @class = "text-danger" })
+                    </td>
+                    <td class="fieldname">
+                        @Html.LabelFor(m => m.HighestEducation, new { @class = "control-label" })
+                    </td>
+                    <td>
+                        @Html.DropDownListFor(
+                            m => m.HighestEducation,
+                            (IList<SelectListItem>)ViewBag.EducationLevelList,
+                            CommonResources.OptionPleaseSelect,
+                            new { @class = "form-control input-sm" })
+                        @Html.ValidationMessageFor(m => m.HighestEducation, "", new { @class = "text-danger" })
+                    </td>
+                </tr>
+            </table>
+        </section>
+    </fieldset>
+    
+    @Html.Partial("_Address", Model)
+    
+    @Html.Partial("_RmReference", Model.RelationshipManager, new ViewDataDictionary
+    {
+        TemplateInfo = new System.Web.Mvc.TemplateInfo { HtmlFieldPrefix = "RelationshipManager" }
+    })
+
+    <br />
+    <div class="form-group">
+        <div class="col-sm-12 text-center">
+            @Html.HiddenFor(m => m.Id)
+            @Html.HiddenFor(m => m.CustomerType)
+
+            <input type="submit" name="actionType" value="@CommonResources.ButtonSave" class="btn btn-default btn-sm" />
+            <input type="submit" name="actionType" value="@CommonResources.ButtonCancel" class="btn btn-default btn-sm cancel" />
+        </div>
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/smartlender")
+
+    <script type="text/javascript">
+    $(function () {
+        $('.datepicker').datepicker({
+            format: 'dd/mm/yyyy',
+            todayHighlight: true
+        });
+        $(".yearpicker").datepicker({
+            format: " yyyy", // Notice the Extra space at the beginning
+            viewMode: "years",
+            minViewMode: "years",
+            todayHighlight: true
+        });
+        $("#copyHomeAddr").click(function () {
+            $('[name="Address.MailingAddress.AddressFormat"]').val(
+                $('[name="Address.HomeAddress.AddressFormat"]').val());
+            $('[name="Address.MailingAddress.StructuredBlock"]').val(
+                $('[name="Address.HomeAddress.StructuredBlock"]').val());
+            $('[name="Address.MailingAddress.StructuredStreet"]').val(
+                $('[name="Address.HomeAddress.StructuredStreet"]').val());
+            $('[name="Address.MailingAddress.StructuredStorey"]').val(
+                $('[name="Address.HomeAddress.StructuredStorey"]').val());
+            $('[name="Address.MailingAddress.StructuredUnit"]').val(
+                $('[name="Address.HomeAddress.StructuredUnit"]').val());
+            $('[name="Address.MailingAddress.StructuredBuilding"]').val(
+                $('[name="Address.HomeAddress.StructuredBuilding"]').val());
+            $('[name="Address.MailingAddress.StructuredCity"]').val(
+                $('[name="Address.HomeAddress.StructuredCity"]').val());
+            $('[name="Address.MailingAddress.StructuredPostalCode"]').val(
+                $('[name="Address.HomeAddress.StructuredPostalCode"]').val());
+            $('[name="Address.MailingAddress.StructuredCountry"]').val(
+                $('[name="Address.HomeAddress.StructuredCountry"]').val());
+            $('[name="Address.MailingAddress.StructuredPoBox"]').val(
+                $('[name="Address.HomeAddress.StructuredPoBox"]').val());
+            $('[name="Address.MailingAddress.UnstructuredAddress1"]').val(
+                $('[name="Address.HomeAddress.UnstructuredAddress1"]').val());
+            $('[name="Address.MailingAddress.UnstructuredAddress2"]').val(
+                $('[name="Address.HomeAddress.UnstructuredAddress2"]').val());
+            $('[name="Address.MailingAddress.UnstructuredAddress3"]').val(
+                $('[name="Address.HomeAddress.UnstructuredAddress3"]').val());
+            $('[name="Address.MailingAddress.UnstructuredAddress4"]').val(
+                $('[name="Address.HomeAddress.UnstructuredAddress4"]').val());
+        });
+        @if (ViewBag.DisplayMode == ClosDotNet.Helper.DisplayMode.View)
+        {
+            <text>
+            prepareCheckerMode();
+            </text>
+        }
+    });
+    </script>
+}

@@ -1,0 +1,123 @@
+﻿@using ClosDotNet.Helper;
+@using ClosDotNet.Resources.Resources;
+
+@model ClosDotNet.Models.CustomerViewModel
+
+<fieldset>
+    <legend>@CustomerResources.TitleCustomerAddress</legend>
+
+    <section id="addressForm">
+        <table class="table table-bordered table-condensed">
+            <tr>
+                <td class="fieldname">
+                    @Html.LabelFor(m => m.HoldMailInd, new { @class = "control-label" })
+                </td>
+                <td colspan="3">
+                    @Html.RadioButtonFor(m => m.HoldMailInd, "Y") @CommonResources.OptionYes
+                    @Html.RadioButtonFor(m => m.HoldMailInd, "N") @CommonResources.OptionNo <br />
+                    @Html.ValidationMessageFor(m => m.HoldMailInd, "", new { @class = "text-danger" })
+                </td>
+            </tr>
+            @if (Model.CustomerType == Constants.GetEnumDescription(CustomerType.Individual))
+            {
+                <tr>
+                    <td class="fieldname">
+                        <label class="control-label">@CustomerResources.LabelDetailResidenceDetails</label>
+                    </td>
+                    <td colspan="3">
+                        <table class="table table-bordered table-condensed" style="margin-bottom: 0px;">
+                            <tr>
+                                <td class="fieldname">
+                                    @Html.LabelFor(m => m.Address.HomeAddress.ResidentialOwnershipType, new { @class = "control-label" })
+                                </td>
+                                <td class="fieldvalue-inner">
+                                    @Html.DropDownListFor(
+                                        m => m.Address.HomeAddress.ResidentialOwnershipType,
+                                        (IList<SelectListItem>)ViewBag.ResidentialOwnershipList,
+                                        CommonResources.OptionPleaseSelect,
+                                        new { @class = "form-control input-sm" })
+                                    @Html.ValidationMessageFor(m => m.Address.HomeAddress.ResidentialOwnershipType, "", new { @class = "text-danger" })
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="fieldname">
+                                    @Html.LabelFor(m => m.Address.HomeAddress.ResidentialType, new { @class = "control-label" })
+                                </td>
+                                <td>
+                                    @Html.DropDownListFor(
+                                        m => m.Address.HomeAddress.ResidentialType,
+                                        (IList<SelectListItem>)ViewBag.ResidentialTypeList,
+                                        CommonResources.OptionPleaseSelect,
+                                        new { @class = "form-control input-sm" })
+                                    @Html.ValidationMessageFor(m => m.Address.HomeAddress.ResidentialType, "", new { @class = "text-danger" })
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="fieldname">
+                                    @Html.LabelFor(m => m.Address.HomeAddress.ResidentialStayStartYear, new { @class = "control-label" })
+                                </td>
+                                <td>
+                                    @Html.TextBoxFor(m => m.Address.HomeAddress.ResidentialStayStartYear, new { @class = "form-control input-sm yearpicker" })
+                                    @Html.ValidationMessageFor(m => m.Address.HomeAddress.ResidentialStayStartYear, "", new { @class = "text-danger" })
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="fieldname">
+                                    @Html.LabelFor(m => m.Address.HomeAddress.ResidentialLengthOfStay, new { @class = "control-label" })
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(m => m.Address.HomeAddress.ResidentialLengthOfStay) @CommonResources.LabelYears
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="fieldname">
+                        <label class="control-label">@CustomerResources.LabelDetailHomeAddress</label>
+                    </td>
+                    <td colspan="3">
+                        @Html.Partial("_AddressDetail", Model.Address.HomeAddress, new ViewDataDictionary
+                        {
+                            TemplateInfo = new System.Web.Mvc.TemplateInfo { HtmlFieldPrefix = "Address.HomeAddress" }
+                        })
+                    </td>
+                </tr>
+            }
+            else
+            {
+                <tr>
+                    <td class="fieldname">
+                        <label class="control-label">@CustomerResources.LabelDetailRegisteredAddress</label>
+                    </td>
+                    <td colspan="3">
+                        @Html.Partial("_AddressDetail", Model.Address.RegisteredAddress, new ViewDataDictionary
+                        {
+                            TemplateInfo = new System.Web.Mvc.TemplateInfo { HtmlFieldPrefix = "Address.RegisteredAddress" }
+                        })
+                    </td>
+                </tr>
+            }
+            <tr>
+                <td class="fieldname">
+                    <label class="control-label">@CustomerResources.LabelDetailMailingAddress</label>
+                    <br /><br />
+                    @if (Model.CustomerType == Constants.GetEnumDescription(CustomerType.Individual))
+                    {
+                        <button type="button" class="btn btn-primary btn-sm" id="copyHomeAddr">@CommonResources.ButtonCopyHomeAddress</button>
+                    }
+                    else
+                    {
+                        <button type="button" class="btn btn-primary btn-sm" id="copyBusinessAddr">@CommonResources.ButtonCopyBusinessAddress</button>
+                    }
+                </td>
+                <td colspan="3">
+                    @Html.Partial("_AddressDetail", Model.Address.MailingAddress, new ViewDataDictionary
+                    {
+                        TemplateInfo = new System.Web.Mvc.TemplateInfo { HtmlFieldPrefix = "Address.MailingAddress" }
+                    })
+                </td>
+            </tr>
+        </table>
+    </section>
+</fieldset>

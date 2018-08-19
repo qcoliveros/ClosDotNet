@@ -1,0 +1,267 @@
+﻿body {
+    font-family : Verdana, Arial, Helvetica, sans-serif;
+    font-size: 11px;
+    color: black;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 25px;
+    padding-right: 40px;
+}
+
+fieldset {
+    border: 1px solid #ddd;
+    padding: 0 20px 10px 20px;
+    box-shadow: 0 0 10px #ddd;
+}
+
+legend {
+    font-size: 15px;
+    font-weight: bold;
+    text-align: left;
+    width: inherit;
+    padding: 0 10px;
+    border-bottom: none;
+}
+
+legend + * {
+    clear: both;
+}
+
+hr { 
+    margin: 10px 0 10px 0; 
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+/*input,*/
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+table {
+    width: 100%;
+}
+
+table thead th {
+    background-color: #222d65;
+    color: white;
+    font-weight: normal;
+    text-align: center;
+}
+
+table tbody td.index {
+    width: 5px;
+    background-color: #222d65 !important;
+    color: white;
+    font-weight: normal;
+    text-align: center;
+}
+
+table tbody tr td.fieldname {
+    background-color: #d7ebf3;
+    width: 20%;
+    text-align: left !important;
+}
+
+table tbody tr td.fieldvalue {
+    width: 30%;
+}
+
+table tbody tr td.fieldvalue-inner {
+    width: 34%;
+}
+
+.datepicker table tr th {
+    background-color: transparent;
+    color: #000;
+    font-weight: 600;
+    font-size: small;
+}
+
+.datepicker table tr td {
+    font-size: small;
+}
+
+.no-border-table td {
+    border-top: none !important;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* BEGIN: Login. */
+.login-main {
+    padding-top: 70px;
+}
+
+.login-panel {
+    position: absolute;
+    top: 50px;
+    width: 944px;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+}
+
+.login-panel {
+    background: url("../Images/login_welcome.png") no-repeat right;
+    height: 325px;
+}
+
+.login-panel-welcome {
+    padding-top: 40px;
+    padding-right: 35px;
+    color: #047a98;
+}
+
+.login-panel-system {
+    padding-right: 35px;
+    padding-bottom: 5px;
+    font-size: 24px;
+    color: #01c9ed;
+}
+
+.login-panel-form {
+    padding-right: 40px;
+}
+
+input.login-control {
+    max-width: 100%;
+}
+
+.login-panel-reminder {
+    width: 360px;
+    padding-right: 35px;
+    font-size: 10px;
+    color: #01c9ed;
+    text-align: left;
+}
+
+.carousel-spacer,
+.carousel-inner .item img {
+    display: block;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.carousel-spacer {
+    height: 18px;
+}
+
+.proprietary {
+    margin-top: 15px;
+    width: 944px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: left;
+    font-size: 11px;
+    color: #000066;
+}
+
+.copyright {
+    text-align: center;
+    font-size: 10px;
+    color: #bbbbbb;
+}
+
+.text-danger-small {
+  color: #b94a48;
+}
+/* END: Login. */
+
+/* BEGIN: Header. */
+.header {
+    vertical-align: top;
+    text-align: right;
+    width: 100%;
+}
+
+.banner {    
+    background: url("../Images/banner_1.jpg") no-repeat right top;
+    height: 60px;
+}
+
+.icon img {
+    padding: 10px 2px 5px 2px;
+}
+/* END: Header. */
+
+/* START: Home */
+.welcome {
+    background: url("../Images/welcome.jpg") no-repeat;
+    height: 580px;
+}
+
+.body-content {
+    padding-top: 20px;
+}
+/* END: Home */
+
+/* START: Tab menu. */
+.tab-menu {
+    padding-top: 5px;
+}
+
+.nav-tabs {
+    margin: 0;
+}
+
+.nav-tabs > li {
+    float: none;
+    display: inline-block;
+}
+
+.nav-tabs > li > a {
+    padding-top: 4px; 
+    padding-bottom: 4px;
+    color: #999;
+    font-weight: 500;
+}
+
+.nav-tabs > li > a:hover {
+    color: #000;
+}
+
+.nav-tabs > li.active > a,
+.nav-tabs > li.active > a:hover,
+.nav-tabs > li.active > a:focus {
+    margin-top: 1px;
+    border-top-color: #0000e5;
+}
+
+.nav-tabs > li {
+    margin-bottom: 0px; 
+
+}
+
+.nav-tabs > li.active {
+    margin-bottom: -1px;    
+}
+/* END: Tab menu. */
+
+.nowrap {
+    white-space: nowrap;
+}
+
+div.fullscreensilk {
+	display: none;
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	width: 100%;
+	height: 100%;
+	z-index: 30000000;
+	opacity: 0.70;
+	filter: alpha(opacity=70);
+	background-color: #F5F5F5;
+}

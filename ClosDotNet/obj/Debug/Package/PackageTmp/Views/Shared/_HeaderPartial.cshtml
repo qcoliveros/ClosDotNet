@@ -1,0 +1,48 @@
+﻿@using Microsoft.AspNet.Identity
+@using System.Web.Security;
+@using ClosDotNet.Resources.Resources;
+
+@if (Request.IsAuthenticated)
+{
+    <table class="header banner">
+        <tr>
+            <td rowspan="2" class="text-left">
+                <img src="~/Resources/Images/logo.png" />
+            </td>
+            <td class="text-right" style="padding-right: 15px;">
+                @User.Identity.Name
+                |
+                @(Roles.IsUserInRole("CA") ? CommonResources.RoleDescriptionCA : "")
+                @(Roles.IsUserInRole("RMTL") ? CommonResources.RoleDescriptionRMTL : "")
+                @(Roles.IsUserInRole("RM") ? CommonResources.RoleDescriptionRM : "")
+                |
+                Version @typeof(ClosDotNet.MvcApplication).Assembly.GetName().Version
+                |
+                @DateTime.Now.ToString()
+            </td>
+        </tr>
+        <tr>
+            <td style="padding-right: 15px;">
+                @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right  icon" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <a href="javascript:document.getElementById('logoutForm').submit()">
+                        <img src="~/Resources/Images/logout.gif" />
+                    </a>
+                }
+                <div class="navbar-right icon">
+                    <a href="@Url.Action("Welcome", "Home")">
+                        <img src="~/Resources/Images/home.gif" />
+                    </a>
+                </div>
+                <div class="navbar-right icon">
+                    <a href="@Url.Action("Search", "Customer")">
+                        <img src="~/Resources/Images/search.gif" />
+                    </a>
+                </div>
+            </td>
+        </tr>
+    </table>
+}
+
+@Html.Partial("_MenuPartial")

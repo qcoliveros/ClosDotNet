@@ -1,0 +1,113 @@
+﻿@using ClosDotNet.Resources.Resources;
+
+@model ClosDotNet.Models.SearchViewModel
+
+@{
+    ViewBag.Title = CustomerResources.TitleCustomerSearch;
+    ViewBag.ActiveMenu = "SearchCustomer";
+}
+
+<fieldset>
+    <legend>@CustomerResources.TitleCustomerSearch</legend>
+
+    <section id="searchForm">
+        <table class="table table-bordered table-condensed">
+            <thead>
+                <tr>
+                    <th colspan="3">@CustomerResources.LabelSearchCustomerInstructions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    @using (Html.BeginForm("SearchByCustomerName", "Customer", FormMethod.Post, new { role = "form" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <td class="fieldname">
+                            @Html.LabelFor(m => m.SearchCustomerName.CustomerName, new { @class = "control-label" })
+                        </td>
+                        <td>
+                            @Html.TextBoxFor(m => m.SearchCustomerName.CustomerName, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.SearchCustomerName.CustomerName, "", new { @class = "text-danger" })
+                        </td>
+                        <td>
+                            <input type="submit" value="@CommonResources.ButtonSearch" class="btn btn-default" />
+                        </td>
+                    }
+                </tr>
+                <tr>
+                    @using (Html.BeginForm("SearchByCifNumber", "Customer", FormMethod.Post, new { role = "form" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <td class="fieldname">
+                            @Html.LabelFor(m => m.SeachCifNumber.CifNumber, new { @class = "control-label" })
+                        </td>
+                        <td>
+                            @Html.TextBoxFor(m => m.SeachCifNumber.CifNumber, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.SeachCifNumber.CifNumber, "", new { @class = "text-danger" })
+                        </td>
+                        <td>
+                            <input type="submit" value="@CommonResources.ButtonSearch" class="btn btn-default" />
+                        </td>
+                    }
+                </tr>
+                <tr>
+                    @using (Html.BeginForm("SearchByIdCombination", "Customer", FormMethod.Post, new { role = "form" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <td width="20%" class="control-label fieldname">
+                            <label class="control-label">@CustomerResources.LabelSearchCustomerId</label>
+                        </td>
+                        <td width="50%">
+                            <table class="table table-bordered table-condensed">
+                                <tbody>
+                                    <tr>
+                                        <td width="30%" class="fieldname">
+                                            @Html.LabelFor(m => m.SeachIdCombination.IdType, new { @class = "control-label" })
+                                        </td>
+                                        <td>
+                                            @Html.DropDownListFor(
+                                                m => m.SeachIdCombination.IdType, 
+                                                (Model != null ? Model.SeachIdCombination.IdTypeList : null), 
+                                                CommonResources.OptionPleaseSelect, 
+                                                new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(m => m.SeachIdCombination.IdType, "", new { @class = "text-danger" })
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td width="30%" class="fieldname">
+                                            @Html.LabelFor(m => m.SeachIdCombination.IdNumber, new { @class = "control-label" })
+                                        </td>
+                                        <td>
+                                            @Html.TextBoxFor(m => m.SeachIdCombination.IdNumber, new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(m => m.SeachIdCombination.IdNumber, "", new { @class = "text-danger" })
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td width="30%" class="fieldname">
+                                            @Html.LabelFor(m => m.SeachIdCombination.IdIssuedCountry, new { @class = "control-label" })
+                                        </td>
+                                        <td>
+                                            @Html.DropDownListFor(
+                                                m => m.SeachIdCombination.IdIssuedCountry,
+                                                (Model != null ? Model.SeachIdCombination.CountryList : null), 
+                                                CommonResources.OptionPleaseSelect, 
+                                                new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(m => m.SeachIdCombination.IdIssuedCountry, "", new { @class = "text-danger" })
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </td>
+                        <td width="30%">
+                            <input type="submit" value="@CommonResources.ButtonSearch" class="btn btn-default" />
+                        </td>
+                    }
+                </tr>
+            </tbody>
+        </table>
+    </section>
+</fieldset>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

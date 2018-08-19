@@ -1,0 +1,70 @@
+﻿@using ClosDotNet.Helper;
+@using ClosDotNet.Resources.Resources;
+@using GridMvc.Html
+@using System.Linq
+
+@model IEnumerable<ClosDotNet.Models.SearchResultViewModel>
+
+@{
+    ViewBag.Title = CustomerResources.TitleCustomerSearchResult;
+    ViewBag.ActiveMenu = "SearchCustomer";
+}
+
+@Styles.Render("~/Content/gridmvc")
+
+<div class="row">
+    <div class="col-md-12">            
+        @using (Html.BeginForm("PrepareCreateCustomer", "Customer", new { customerId = 0 }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+        {
+            <table>
+                <tr>
+                    <td><h4>@CustomerResources.TitleCustomerSearchResult</h4></td>
+                    <td class="text-right">
+                        @if (!Roles.IsUserInRole("CA"))
+                        {
+                            <input type="submit" value="@CommonResources.ButtonCreateNewCompany" name="PrepareCreateCompany" class="btn btn-default btn-sm" />
+                            <input type="submit" value="@CommonResources.ButtonCreateNewIndividual" name="PrepareCreateIndividual" class="btn btn-default btn-sm" />
+                        }
+                    </td>
+                </tr>
+            </table>
+        }
+        <hr />
+
+        @{ int rowNumber = 0; }
+        @Html.Grid(Model).Columns(columns =>
+        {
+            columns.Add().Titled(CommonResources.LabelRowNumber)
+                .Sanitized(false).Encoded(false)
+                .RenderValueAs(o =>
+                {
+                    rowNumber++;
+                    return UIUtility.RenderRowNumber(Request.QueryString["grid-page"], 10, rowNumber);
+                })
+                .Css("index");
+            columns.Add(c => c.CustomerName).Titled(CustomerResources.LabelSearchResultCustomerName)
+                .Sanitized(false).Encoded(false)
+                .RenderValueAs(c => Html.ActionLink(c.CustomerName, "ViewCustomer", new { customerId = c.CustomerId, customerType = c.CustomerType })
+                .ToHtmlString());
+            columns.Add(c => c.CifNumber).Titled(CustomerResources.LabelSearchResultCifNumber);
+            columns.Add(c => c.IdType).Titled(CustomerResources.LabelSearchResultIdType);
+            columns.Add(c => c.IdNumber).Titled(CustomerResources.LabelSearchResultIdNumber);
+            columns.Add(c => c.IdCountry).Titled(CustomerResources.LabelSearchResultIdIssuedCountry);
+            columns.Add(c => c.RmName).Titled(CustomerResources.LabelSearchResultRMName);   
+        }).WithPaging(5)
+
+        @using (Html.BeginForm("Search", "Customer", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+        {
+            <div class="form-group">
+                <div class="col-md-12 text-center">
+                    <br />
+                    <input type="submit" value="@CommonResources.ButtonReturnToSearch" class="btn btn-default btn-sm" />
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/gridmvc")
+}

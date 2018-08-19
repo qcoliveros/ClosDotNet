@@ -1,0 +1,171 @@
+﻿@using ClosDotNet.Resources.Resources;
+
+@model ClosDotNet.Models.CallReportViewModel
+
+@{
+    ViewBag.Title = CallReportResources.TitleCallReportDetails;
+    ViewBag.ActiveMenu = "Customer";
+    ViewBag.ActiveSubMenu = "CustomerCallReport";
+}
+
+@using (Html.BeginForm("ProcessCallReport", "CallReport", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.Partial("Message")
+
+    <fieldset>
+        <legend>@CallReportResources.TitleCallReportDetails</legend>
+
+        <section id="callReportForm">                
+            <table class="table table-bordered table-condensed">
+                <tr>
+                    <td class="fieldname">
+                        @Html.LabelFor(m => m.CustomerName, new { @class = "control-label" })
+                    </td>
+                    <td class="fieldvalue">
+                        @Html.DisplayFor(m => m.CustomerName, new { @class = "form-control input-sm" })
+                        @Html.HiddenFor(m => m.CustomerName)
+                    </td>
+                    <td class="fieldname">
+                        @Html.LabelFor(m => m.ReferenceNo, new { @class = "control-label" })
+                    </td>
+                    <td class="fieldvalue">
+                        @Html.DisplayFor(m => m.ReferenceNo, new { @class = "form-control input-sm" })
+                        @Html.HiddenFor(m => m.ReferenceNo)
+                    </td>
+                </tr>
+                <tr>
+                    <td class="fieldname">
+                        @Html.LabelFor(m => m.CallDate, new { @class = "control-label" })
+                    </td>
+                    <td>
+                        @Html.TextBoxFor(m => m.CallDate, new { @class = "form-control input-sm datepicker" })
+                        @Html.ValidationMessageFor(m => m.CallDate, "", new { @class = "text-danger" })
+                    </td>
+                    <td class="fieldname">
+                        @Html.LabelFor(m => m.SiteVisitDate, new { @class = "control-label" })
+                    </td>
+                    <td>
+                        @Html.TextBoxFor(m => m.SiteVisitDate, new { @class = "form-control input-sm datepicker" })
+                        @Html.ValidationMessageFor(m => m.SiteVisitDate, "", new { @class = "text-danger" })
+                    </td>
+                </tr>
+                <tr>
+                    <td class="fieldname">
+                        @Html.LabelFor(m => m.ContactMode, new { @class = "control-label" })
+                    </td>
+                    <td>
+                        @Html.RadioButtonFor(m => m.ContactMode, "I") @CallReportResources.OptionContactModeByPhone <br />
+                        @Html.RadioButtonFor(m => m.ContactMode, "C") @CallReportResources.OptionContactModeAtBank <br />
+                        @Html.RadioButtonFor(m => m.ContactMode, "N") @CallReportResources.OptionContactModeAtClientOffice <br />
+                        @Html.RadioButtonFor(m => m.ContactMode, "O") @CallReportResources.OptionContactModeOtherLocation <br />
+                        @Html.ValidationMessageFor(m => m.ContactMode, "", new { @class = "text-danger" })
+                    </td>
+                    <td class="fieldname">
+                        @Html.LabelFor(m => m.CallPurpose, new { @class = "control-label" })
+                    </td>
+                    <td>
+                        @Html.DropDownListFor(
+                            m => m.CallPurpose, 
+                            (IList<SelectListItem>) ViewBag.CallPurposeList, 
+                            CommonResources.OptionPleaseSelect, 
+                            new { @class = "form-control input-sm" })
+                        @Html.ValidationMessageFor(m => m.CallPurpose, "", new { @class = "text-danger" })
+                    </td>
+                </tr>
+                <tr>
+                    <td class="fieldname">
+                        @Html.LabelFor(m => m.Purpose, new { @class = "control-label" })
+                    </td>
+                    <td colspan="3">
+                        @Html.TextAreaFor(m => m.Purpose, new { @class = "form-control input-sm", @rows = "5" })
+                        @Html.ValidationMessageFor(m => m.Purpose, "", new { @class = "text-danger" })
+                    </td>
+                </tr>
+                <tr>
+                    <td class="fieldname">
+                        @Html.LabelFor(m => m.Attendees, new { @class = "control-label" })
+                    </td>
+                    <td colspan="3">
+                        @Html.TextAreaFor(m => m.Attendees, new { @class = "form-control input-sm", @rows = "5" })
+                        @Html.ValidationMessageFor(m => m.Attendees, "", new { @class = "text-danger" })
+                    </td>
+                </tr>
+                <tr>
+                    <td class="fieldname">
+                        @Html.LabelFor(m => m.FollowUp, new { @class = "control-label" })
+                    </td>
+                    <td colspan="3">
+                        @Html.TextAreaFor(m => m.FollowUp, new { @class = "form-control input-sm", @rows = "5" })
+                        @Html.ValidationMessageFor(m => m.FollowUp, "", new { @class = "text-danger" })
+                    </td>
+                </tr>
+            </table>                
+        </section>
+    </fieldset>
+
+    <fieldset>
+        <legend>@CallReportResources.SubTitleSubmit</legend>
+
+        <section id="callReportForm">                
+            <table class="table table-bordered table-condensed">
+                <tr>
+                    <td class="fieldname">
+                        @Html.LabelFor(m => m.Action, new { @class = "control-label" })
+                    </td>
+                    <td class="fieldvalue">
+                        @Html.DropDownListFor(
+                            m => m.Action,
+                            (IList<SelectListItem>)ViewBag.ActionList,
+                            CommonResources.OptionPleaseSelect,
+                            new { @class = "form-control input-sm" })
+                        @Html.ValidationMessageFor(m => m.Action, "", new { @class = "text-danger" })
+                    </td>
+                    <td class="fieldname">
+                        @Html.LabelFor(m => m.ReviewerId, new { @class = "control-label" })
+                    </td>
+                    <td class="fieldvalue">
+                        @Html.DropDownListFor(
+                            m => m.ReviewerId,
+                            (IList<SelectListItem>)ViewBag.ReviewerList,
+                            CommonResources.OptionPleaseSelect,
+                            new { @class = "form-control input-sm" })
+                        @Html.ValidationMessageFor(m => m.ReviewerId, "", new { @class = "text-danger" })
+                    </td>
+
+                </tr>
+            </table>
+        </section>
+    </fieldset>
+    
+    <div class="form-group">
+        <div class="col-sm-12 text-center">
+            <br />
+            @Html.HiddenFor(m => m.Id)
+            
+            <input type="submit" name="actionType" value="@CommonResources.ButtonProcess" class="btn btn-default btn-sm" />
+            <input type="submit" name="actionType" value="@CommonResources.ButtonCancel" class="btn btn-default btn-sm cancel" />
+        </div>
+    </div>
+}
+    
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/foolproof")
+    @Scripts.Render("~/bundles/smartlender")
+
+    <script type="text/javascript">
+    $(function () {
+        $('.datepicker').datepicker({
+            format: 'dd/mm/yyyy',
+            todayHighlight: true
+        });
+        @if (ViewBag.DisplayMode == ClosDotNet.Helper.DisplayMode.View)
+        {
+            <text>
+            prepareCheckerMode();
+            </text>
+        }
+    });
+    </script>
+}

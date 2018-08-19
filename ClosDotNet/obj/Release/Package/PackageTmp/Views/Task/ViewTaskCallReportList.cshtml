@@ -1,0 +1,56 @@
+﻿@using ClosDotNet.Resources.Resources;
+@using GridMvc.Html
+@using System.Linq
+
+@model IEnumerable<ClosDotNet.Models.CallReportTaskViewModel>
+
+@{
+    ViewBag.Title = TaskListResources.TitleReportList;
+    ViewBag.ActiveMenu = "TaskCreditOrigination";
+    ViewBag.ActiveSubMenu = "TaskCallReport";
+}
+
+<h4>
+    @TaskListResources.TitleReportList
+     - 
+    @(ViewBag.ActiveSubSubMenu == "TaskDraftCallReport" 
+        ? @TaskListResources.TitleReportListDraft
+        : @TaskListResources.TitleReportListSubmitted)
+</h4>
+<hr />
+
+<div class="row">
+    <div class="col-md-12">
+        @{ int rowNumber = 0; }        
+        @Html.Grid(Model).Columns(columns =>
+            {
+                columns.Add().Titled(CommonResources.LabelRowNumber)
+                    .Sanitized(false).Encoded(false)
+                    .RenderValueAs(o =>
+                    {
+                        rowNumber++;
+                        return RenderRowNumber(rowNumber);
+                    });
+                columns.Add(c => c.CustomerName).Titled(TaskListResources.LabelReportListCustomerName)
+                    .Sanitized(false).Encoded(false)
+                    .RenderValueAs(c => Html.ActionLink(
+                        c.CustomerName, "ViewCustomer", "Customer", new { customerId = c.CustomerId }, null)
+                    .ToHtmlString());
+                columns.Add(c => c.OriginatorName).Titled(TaskListResources.LabelReportListOriginator);
+                columns.Add(c => c.LastRecipientName).Titled(TaskListResources.LabelReportListLastRecipient);
+                columns.Add(c => c.ReferenceNo).Titled(TaskListResources.LabelReportListRefNo)
+                    .Sanitized(false).Encoded(false)
+                    .RenderValueAs(c => Html.ActionLink(
+                        c.ReferenceNo, "ViewCallReport", "CallReport", new { callReportId = c.CallReportId }, null)
+                    .ToHtmlString());
+                columns.Add(c => c.CallDate).Titled(TaskListResources.LabelReportListCallDate);
+                columns.Add(c => c.CallPurpose).Titled(TaskListResources.LabelReportListCallPurpose);
+                columns.Add(c => c.Workflow).Titled(CallReportResources.LabelReportListWorkflow);
+            }).WithPaging(5)
+    </div>
+</div>
+
+@helper RenderRowNumber(int rowNumber)
+{
+    @rowNumber
+}

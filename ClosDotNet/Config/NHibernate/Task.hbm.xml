@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2">
+  
+  <class name="ClosDotNet.Domain.Task.TaskVO, ClosDotNet" table="SML_TASK">
+    <!-- BaseValueObject -->
+    <id name="Id" column="ID" unsaved-value="0">
+      <generator class="increment" />
+    </id>
+    <version name="VersionNumber" column="VERSION_TIME" />
+    <property name="CreateBy" column="CREATE_BY" />
+    <property name="CreationDate" column="CREATION_DATE" />
+    <property name="LastUpdateBy" column="LAST_UPDATE_BY" />
+    <property name="LastUpdateDate" column="LAST_UPDATE_DATE" />
+    <!-- TaskVO -->
+    <component name="Initiator" class="ClosDotNet.Domain.User.UserVO, ClosDotNet">
+      <property name="Id" column="INITIATOR_ID" />
+      <property name="FullName" formula="(SELECT su.full_name FROM sml_user su WHERE su.id = INITIATOR_ID)" />
+    </component>
+    <component name="PreviousOwner" class="ClosDotNet.Domain.User.UserVO, ClosDotNet">
+      <property name="Id" column="PREVIOUS_OWNER_ID" />
+      <property name="FullName" formula="(SELECT su.full_name FROM sml_user su WHERE su.id = PREVIOUS_OWNER_ID)" />
+    </component>
+    <component name="CurrentOwner" class="ClosDotNet.Domain.User.UserVO, ClosDotNet">
+      <property name="Id" column="CURRENT_OWNER_ID" />
+      <property name="FullName" formula="(SELECT su.full_name FROM sml_user su WHERE su.id = CURRENT_OWNER_ID)" />
+    </component>
+    <property name="ReferenceId" column="REFERENCE_ID" />
+    <property name="Status" column="STATUS" />
+    <property name="WorkflowProcessId" column="WORKFLOW_PROCESS_ID" />
+    <property name="WorkflowDefinitionId" column="WORKFLOW_DEFINITION_ID" />
+    <property name="WorkflowType" column="WORKFLOW_TYPE" />
+    <property name="TaskAction" column="TASK_ACTION" />
+    <property name="TaskStatus" column="TASK_STATUS" />
+  </class>
+  
+</hibernate-mapping>

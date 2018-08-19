@@ -1,0 +1,17 @@
+﻿@using Microsoft.AspNet.Identity
+@using System.Web.Security;
+@using ClosDotNet.Resources.Resources;
+
+@if (!Request.IsAuthenticated)
+{
+    <div class="container">
+        <br />
+        <footer>
+            <p class="copyright">
+                @LoginResources.Copyright
+                <br />
+                @typeof(ClosDotNet.MvcApplication).Assembly.GetName().Version | @System.Net.Dns.GetHostName()
+            </p>
+        </footer>
+    </div>
+}

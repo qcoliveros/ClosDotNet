@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2">
+  
+  <class name="ClosDotNet.Domain.CodeSet.CodeSetVO, ClosDotNet" table="CODE_SET" lazy="false" where="DEPRECATED='N'">
+    <!-- BaseValueObject -->
+    <id name="Id" column="ID" unsaved-value="0">
+      <generator class="increment" />
+    </id>
+    <version name="VersionNumber" column="VERSION_TIME" />
+    <property name="CreateBy" column="CREATE_BY" />
+    <property name="CreationDate" column="CREATION_DATE" />
+    <property name="LastUpdateBy" column="LAST_UPDATE_BY" />
+    <property name="LastUpdateDate" column="LAST_UPDATE_DATE" />
+    <!-- DualControlledBaseValueObject -->
+    <property name="MasterId" column="MASTER_ID"/>
+    <property name="Deprecated" column="DEPRECATED"/>
+    <property name="Status" column="STATUS"/>
+    <!-- CodeSetVO -->
+    <property name="Code" column="CODE" />
+    <property name="Name" column="CODE_VALUE" />
+    <property name="MaintenanceInd" column="MAINTENANCE_IND" />
+  </class>
+  
+  <class name="ClosDotNet.Domain.CodeSet.CodeValueVO, ClosDotNet" table="CODE_VALUE">
+    <!-- BaseValueObject -->
+    <id name="Id" column="ID" unsaved-value="0">
+      <generator class="increment" />
+    </id>
+    <version name="VersionNumber" column="VERSION_TIME" />
+    <property name="CreateBy" column="CREATE_BY" />
+    <property name="CreationDate" column="CREATION_DATE" />
+    <property name="LastUpdateBy" column="LAST_UPDATE_BY" />
+    <property name="LastUpdateDate" column="LAST_UPDATE_DATE" />
+    <!-- DualControlledBaseValueObject -->
+    <property name="MasterId" column="MASTER_ID"/>
+    <property name="Deprecated" column="DEPRECATED"/>
+    <property name="Status" column="STATUS"/>
+    <!-- CodeValueVO -->
+    <property name="Code" column="CODE" />
+    <property name="Description" column="CODE_VALUE" />
+    <property name="CodeSetId" column="CODE_SET_VALUE_ID" />
+    <property name="DisplayOrder" column="DISPLAY_ORDER" />
+    <property name="ParentId" column="CODE_VALUE_PARENT_ID" />
+    <property name="ParentCode" column="CODE_VALUE_PARENT_CODE" />
+  </class>
+  
+  <class name="ClosDotNet.Domain.CodeSet.CountryVO, ClosDotNet" table="SCI_COUNTRY" lazy="false">
+    <!-- BaseValueObject -->
+    <id name="Id" column="ID" unsaved-value="0">
+      <generator class="increment" />
+    </id>
+    <!-- CountryVO -->
+    <property name="Code" column="CTR_CNTRY_ISO_CODE" />
+    <property name="Description" column="CTR_CNTRY_NAME" />
+  </class>
+  
+  <class name="ClosDotNet.Domain.CodeSet.CurrencyVO, ClosDotNet" table="SCI_CURRENCY" lazy="false">
+    <!-- BaseValueObject -->
+    <id name="Id" column="ID" unsaved-value="0">
+      <generator class="increment" />
+    </id>
+    <!-- CurrencyVO -->
+    <property name="Code" column="CUR_CRRNCY_ISO_CODE" />
+    <property name="Description" column="CUR_CRRNCY_DESC" />
+  </class>
+  
+</hibernate-mapping>

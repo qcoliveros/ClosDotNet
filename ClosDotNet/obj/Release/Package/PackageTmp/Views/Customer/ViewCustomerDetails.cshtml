@@ -1,0 +1,165 @@
+﻿@using ClosDotNet.Resources.Resources;
+
+@model ClosDotNet.Models.CustomerViewModel
+
+@{
+    ViewBag.Title = CustomerResources.TitleCustomerDetails;
+    ViewBag.ActiveMenu = "Customer";
+    ViewBag.ActiveSubMenu = "CustomerDetails";
+}
+
+@Html.Partial("Message")
+<fieldset>
+    <legend>@CustomerResources.TitleCustomerDetails</legend>
+
+    <section id="customerForm">
+        @using (Html.BeginForm("SaveCustomer", "Customer", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    
+            <table class="table table-bordered table-condensed">
+                <tr>
+                    <td class="fieldname">
+                        @Html.LabelFor(m => m.HostCustomerName, new { @class = "control-label" })
+                    </td>
+                    <td>
+                        @Html.TextBoxFor(m => m.HostCustomerName, new { @class = "form-control", @readonly = "readonly" })
+                        @Html.ValidationMessageFor(m => m.HostCustomerName, "", new { @class = "text-danger" })
+                    </td>
+                    <td class="fieldname">
+                        @Html.LabelFor(m => m.CifNumber, new { @class = "control-label" })
+                    </td>
+                    <td>
+                        @Html.TextBoxFor(m => m.CifNumber, new { @class = "form-control", @readonly = "readonly" })
+                        @Html.ValidationMessageFor(m => m.CifNumber, "", new { @class = "text-danger" })
+                    </td>
+                </tr>
+                <tr>
+                    <td class="fieldname">
+                        @Html.LabelFor(m => m.CustomerName, new { @class = "control-label" })
+                    </td>
+                    <td>
+                        @Html.TextBoxFor(m => m.CustomerName, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.CustomerName, "", new { @class = "text-danger" })
+                    </td>
+                    <td class="fieldname">
+                        @Html.LabelFor(m => m.NewProspect, new { @class = "control-label" })
+                    </td>
+                    <td>
+                        @if (Model != null && !Model.NewProspect)
+                        {
+                            @Html.CheckBoxFor(m => m.NewProspect, new { @disabled = "disabled" })                                    
+                        }
+                        else
+                        {
+                            @Html.CheckBoxFor(m => m.NewProspect)
+                        }
+                        @Html.ValidationMessageFor(m => m.NewProspect, "", new { @class = "text-danger" })
+                    </td>
+                </tr>
+                <tr>
+                    <td width="20%" class="fieldname">
+                        <label class="control-label">@CustomerResources.LabelSearchCustomerId</label>
+                    </td>
+                    <td colspan="3">
+                        <table class="table table-bordered table-condensed">
+                            <tr>
+                                <td class="fieldname">
+                                    @Html.LabelFor(m => m.IdType, new { @class = "control-label" })
+                                </td>
+                                <td>
+                                    @Html.DropDownListFor(
+                                        m => m.IdType, 
+                                        (Model != null ? Model.IdTypeList : null), 
+                                        CommonResources.OptionPleaseSelect, 
+                                        new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(m => m.IdType, "", new { @class = "text-danger" })
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="fieldname">
+                                    @Html.LabelFor(m => m.IdNumber, new { @class = "control-label" })
+                                </td>
+                                <td>
+                                    @Html.TextBoxFor(m => m.IdNumber, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(m => m.IdNumber, "", new { @class = "text-danger" })
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="fieldname">
+                                    @Html.LabelFor(m => m.IdIssuedCountry, new { @class = "control-label" })
+                                </td>
+                                <td>
+                                    @Html.DropDownListFor(
+                                        m => m.IdIssuedCountry, 
+                                        (Model != null ? Model.CountryList : null), 
+                                        CommonResources.OptionPleaseSelect, 
+                                        new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(m => m.IdIssuedCountry, "", new { @class = "text-danger" })
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="fieldname">
+                                    @Html.LabelFor(m => m.IdIssuedPlace, new { @class = "control-label" })
+                                </td>
+                                <td>
+                                    @Html.TextBoxFor(m => m.IdIssuedPlace, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(m => m.IdIssuedPlace, "", new { @class = "text-danger" })
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="fieldname">
+                                    @Html.LabelFor(m => m.IdIssuedDate, new { @class = "control-label" })
+                                </td>
+                                <td>
+                                    @Html.TextBoxFor(m => m.IdIssuedDate, new { @class = "form-control datepicker" })
+                                    @Html.ValidationMessageFor(m => m.IdIssuedDate, "", new { @class = "text-danger" })
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="fieldname">
+                                    @Html.LabelFor(m => m.IdExpiryDate, new { @class = "control-label" })
+                                </td>
+                                <td>
+                                    @Html.TextBoxFor(m => m.IdExpiryDate, new { @class = "form-control datepicker" })
+                                    @Html.ValidationMessageFor(m => m.IdExpiryDate, "", new { @class = "text-danger" })
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+            <div class="form-group">
+                <div class="col-sm-12 text-center">
+                    <br />
+                    @Html.HiddenFor(m => m.Id)
+                    @Html.HiddenFor(m => m.CustomerType)
+                    @if (!Roles.IsUserInRole("CA"))
+                    {
+                        <input type="submit" name="actionType" value="@CommonResources.ButtonSave" class="btn btn-default" />
+                    }                            
+                    <input type="submit" name="actionType" value="@CommonResources.ButtonCancel" class="btn btn-default cancel" />
+                </div>
+            </div>
+        }
+    </section>
+</fieldset>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script type="text/javascript">
+    $(function () {
+        $('.datepicker').datepicker();
+        @if (Roles.IsUserInRole("CA"))
+        {
+            <text>
+            $('input').attr('readonly', true);
+            $('select').attr('disabled', true).attr('readonly', true);
+            $('.datepicker').attr('disabled', true).attr('readonly', true);
+            </text>
+        }
+    });
+    </script>
+}

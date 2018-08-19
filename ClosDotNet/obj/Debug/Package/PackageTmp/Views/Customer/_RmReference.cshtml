@@ -1,0 +1,23 @@
+﻿@using ClosDotNet.Helper;
+@using ClosDotNet.Resources.Resources;
+
+@model ClosDotNet.Models.RelationshipManager
+
+<fieldset>
+    <legend>@CustomerResources.TitleRmReference</legend>
+
+    <section id="rmReferenceForm">
+        <table class="table table-bordered table-condensed">
+            <tr>
+                <td class="fieldname">
+                    @Html.LabelFor(m => m.FullName, new { @class = "control-label" })
+                </td>
+                <td colspan="3">
+                    @Html.HiddenFor(m => m.Id)
+                    @Html.TextBoxFor(m => m.FullName, new { @class = "form-control input-sm", @readonly = "readonly" })
+                    @Html.ValidationMessageFor(m => m.FullName, "", new { @class = "text-danger" })
+                </td>
+            </tr>
+        </table>
+    </section>
+</fieldset>

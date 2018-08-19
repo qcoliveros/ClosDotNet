@@ -1,0 +1,342 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="LabelDetailAccountOpenedDate" xml:space="preserve">
+    <value>Date Account Opened</value>
+  </data>
+  <data name="LabelDetailAddressBlockNo" xml:space="preserve">
+    <value>Bldg/Blk/Hse No.</value>
+  </data>
+  <data name="LabelDetailAddressBuildingName" xml:space="preserve">
+    <value>Building Name</value>
+  </data>
+  <data name="LabelDetailAddressCity" xml:space="preserve">
+    <value>State/City</value>
+  </data>
+  <data name="LabelDetailAddressCountry" xml:space="preserve">
+    <value>Country *</value>
+  </data>
+  <data name="LabelDetailAddressFormat" xml:space="preserve">
+    <value>Address Format *</value>
+  </data>
+  <data name="LabelDetailAddressHoldMail" xml:space="preserve">
+    <value>Hold Mail</value>
+  </data>
+  <data name="LabelDetailAddressPoBox" xml:space="preserve">
+    <value>VBox/SINGPOST Box No.</value>
+  </data>
+  <data name="LabelDetailAddressPostalCode" xml:space="preserve">
+    <value>Postal Code</value>
+  </data>
+  <data name="LabelDetailAddressStorey" xml:space="preserve">
+    <value>Storey</value>
+  </data>
+  <data name="LabelDetailAddressStreet" xml:space="preserve">
+    <value>Street</value>
+  </data>
+  <data name="LabelDetailAddressUnit" xml:space="preserve">
+    <value>Unit</value>
+  </data>
+  <data name="LabelDetailAge" xml:space="preserve">
+    <value>Age</value>
+  </data>
+  <data name="LabelDetailBirthDate" xml:space="preserve">
+    <value>Date of Birth</value>
+  </data>
+  <data name="LabelDetailBusinessOperationCountry" xml:space="preserve">
+    <value>Country of Business Operation *</value>
+  </data>
+  <data name="LabelDetailCifNumber" xml:space="preserve">
+    <value>CIF/Prospect Customer No *</value>
+  </data>
+  <data name="LabelDetailClassification" xml:space="preserve">
+    <value>Classification *</value>
+  </data>
+  <data name="LabelDetailConstitution" xml:space="preserve">
+    <value>Customer Constitution *</value>
+  </data>
+  <data name="LabelDetailDependentCount" xml:space="preserve">
+    <value>No. of Dependents</value>
+  </data>
+  <data name="LabelDetailFacilityGrantedDate" xml:space="preserve">
+    <value>Date Facility Granted</value>
+  </data>
+  <data name="LabelDetailFirstCreditGrantedDate" xml:space="preserve">
+    <value>First Credit Granted Date</value>
+  </data>
+  <data name="LabelDetailGender" xml:space="preserve">
+    <value>Gender *</value>
+  </data>
+  <data name="LabelDetailHighestEducation" xml:space="preserve">
+    <value>Highest Education</value>
+  </data>
+  <data name="LabelDetailHomeAddress" xml:space="preserve">
+    <value>Home Address *</value>
+  </data>
+  <data name="LabelDetailId" xml:space="preserve">
+    <value>Primary ID *</value>
+  </data>
+  <data name="LabelDetailIdIssuedCountry" xml:space="preserve">
+    <value>Country Of Issue</value>
+  </data>
+  <data name="LabelDetailIdNumber" xml:space="preserve">
+    <value>No.</value>
+  </data>
+  <data name="LabelDetailIdType" xml:space="preserve">
+    <value>Type</value>
+  </data>
+  <data name="LabelDetailIncorporationCountry" xml:space="preserve">
+    <value>Country of Incorporation *</value>
+  </data>
+  <data name="LabelDetailIncorporationDate" xml:space="preserve">
+    <value>Date of Incorporation</value>
+  </data>
+  <data name="LabelDetailLegalName" xml:space="preserve">
+    <value>Legal Name *</value>
+  </data>
+  <data name="LabelDetailMailingAddress" xml:space="preserve">
+    <value>Mailing Address ^</value>
+  </data>
+  <data name="LabelDetailMandatoryInfoNotAvailable" xml:space="preserve">
+    <value>Mandatory Information not available</value>
+  </data>
+  <data name="LabelDetailMaritalStatus" xml:space="preserve">
+    <value>Marital Status</value>
+  </data>
+  <data name="LabelDetailMoreThan50S35" xml:space="preserve">
+    <value>More than 50% of turnover?</value>
+  </data>
+  <data name="LabelDetailName" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="LabelDetailNameLine1" xml:space="preserve">
+    <value>Name *</value>
+  </data>
+  <data name="LabelDetailNationality" xml:space="preserve">
+    <value>Nationality *</value>
+  </data>
+  <data name="LabelDetailPermanentResidentInd" xml:space="preserve">
+    <value>Permanent Resident *</value>
+  </data>
+  <data name="LabelDetailPreviousLegalName" xml:space="preserve">
+    <value>Previous Legal Name</value>
+  </data>
+  <data name="LabelDetailPreviousName" xml:space="preserve">
+    <value>Previous Name</value>
+  </data>
+  <data name="LabelDetailPreviousSalutation" xml:space="preserve">
+    <value>Previous Salutation</value>
+  </data>
+  <data name="LabelDetailPrimaryOfficerName" xml:space="preserve">
+    <value>Primary Officer Name</value>
+  </data>
+  <data name="LabelDetailRace" xml:space="preserve">
+    <value>Race</value>
+  </data>
+  <data name="LabelDetailRegisteredAddress" xml:space="preserve">
+    <value>Registered Address ^</value>
+  </data>
+  <data name="LabelDetailRelationshipSince" xml:space="preserve">
+    <value>Relationship Since</value>
+  </data>
+  <data name="LabelDetailResidenceDetails" xml:space="preserve">
+    <value>Residence Details</value>
+  </data>
+  <data name="LabelDetailResidentCountry" xml:space="preserve">
+    <value>Country of Resident *</value>
+  </data>
+  <data name="LabelDetailResidentialOwnership" xml:space="preserve">
+    <value>Ownership</value>
+  </data>
+  <data name="LabelDetailResidentialStayLength" xml:space="preserve">
+    <value>Length of Stay</value>
+  </data>
+  <data name="LabelDetailResidentialStayStartDate" xml:space="preserve">
+    <value>Since when</value>
+  </data>
+  <data name="LabelDetailResidentialType" xml:space="preserve">
+    <value>Type</value>
+  </data>
+  <data name="LabelDetailSalutation" xml:space="preserve">
+    <value>Salutation *</value>
+  </data>
+  <data name="LabelDetailUnstructuredAddress" xml:space="preserve">
+    <value>Unstructured Address</value>
+  </data>
+  <data name="LabelDetailWithBankSinceDate" xml:space="preserve">
+    <value>With Bank Since Date</value>
+  </data>
+  <data name="LabelSearchCifNumber" xml:space="preserve">
+    <value>CIF Number</value>
+  </data>
+  <data name="LabelSearchCustomerId" xml:space="preserve">
+    <value>ID</value>
+  </data>
+  <data name="LabelSearchCustomerInstructions" xml:space="preserve">
+    <value>Please enter search criteria</value>
+  </data>
+  <data name="LabelSearchCustomerName" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="LabelSearchIdIssuedCountry" xml:space="preserve">
+    <value>Issued Country</value>
+  </data>
+  <data name="LabelSearchIdNumber" xml:space="preserve">
+    <value>No.</value>
+  </data>
+  <data name="LabelSearchIdType" xml:space="preserve">
+    <value>Type</value>
+  </data>
+  <data name="LabelSearchResultCifNumber" xml:space="preserve">
+    <value>CIF Number</value>
+  </data>
+  <data name="LabelSearchResultCustomerName" xml:space="preserve">
+    <value>Customer Name</value>
+  </data>
+  <data name="LabelSearchResultIdIssuedCountry" xml:space="preserve">
+    <value>ID Issued Country</value>
+  </data>
+  <data name="LabelSearchResultIdNumber" xml:space="preserve">
+    <value>ID Number</value>
+  </data>
+  <data name="LabelSearchResultIdType" xml:space="preserve">
+    <value>ID Type</value>
+  </data>
+  <data name="LabelSearchResultRMName" xml:space="preserve">
+    <value>Primary Officer Name</value>
+  </data>
+  <data name="TitleCompanyDetails" xml:space="preserve">
+    <value>Company Details</value>
+  </data>
+  <data name="TitleCustomerAddress" xml:space="preserve">
+    <value>Address</value>
+  </data>
+  <data name="TitleCustomerSearch" xml:space="preserve">
+    <value>Search Customer</value>
+  </data>
+  <data name="TitleCustomerSearchResult" xml:space="preserve">
+    <value>Search Result</value>
+  </data>
+  <data name="TitleIndividualDetails" xml:space="preserve">
+    <value>Individual Details</value>
+  </data>
+  <data name="TitleRmReference" xml:space="preserve">
+    <value>RM Reference</value>
+  </data>
+</root>

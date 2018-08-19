@@ -1,0 +1,113 @@
+﻿@using ClosDotNet.Resources.Resources;
+
+@model ClosDotNet.Models.BusinessViewModel
+
+@{
+    ViewBag.Title = BusinessResources.TitleBusiness;
+    ViewBag.ActiveMenu = "Customer";
+    ViewBag.ActiveSubMenu = "CustomerBusiness";
+}
+
+@Styles.Render("~/Content/cleditor")
+
+@using (Html.BeginForm("SaveBusiness", "Business", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.Partial("Message")
+    <section id="businessForm">
+        <fieldset>
+            <legend>@BusinessResources.TitleBusiness</legend>
+
+            <table class="table table-bordered table-condensed">
+                <tr>
+                    <td class="fieldname">
+                        <label class="control-label">@BusinessResources.LabelCurrentPaidUpCapital</label>
+                    </td>
+                    <td>
+                        <div class="form-inline">
+                            @Html.DropDownListFor(
+                                m => m.CurrentPaidUpCapitalCurrency,
+                                (IList<SelectListItem>)ViewBag.CurrencyList,
+                                CommonResources.OptionPleaseSelect,
+                                new { @class = "form-control input-sm", @style = "width: 125px !important;" })
+                            @Html.TextBoxFor(m => m.CurrentPaidUpCapitalAmount, new { @class = "form-control input-sm" })
+                        </div>
+                        @Html.ValidationMessageFor(m => m.CurrentPaidUpCapitalCurrency, "", new { @class = "text-danger" })
+                        @Html.ValidationMessageFor(m => m.CurrentPaidUpCapitalAmount, "", new { @class = "text-danger" })
+                    </td>
+                </tr>
+                <tr>
+                    <td class="fieldname">
+                        @Html.LabelFor(m => m.BorrowerBackground, new { @class = "control-label" })
+                        <br />
+                        @BusinessResources.LabelBorrowerBackground2
+                    </td>
+                    <td>
+                        @Html.TextAreaFor(m => m.BorrowerBackground, new { @class = "form-control input-sm", @rows = "5" })
+                        @Html.ValidationMessageFor(m => m.BorrowerBackground, "", new { @class = "text-danger" })
+                    </td>
+                </tr>
+                <tr>
+                    <td class="fieldname">
+                        @Html.LabelFor(m => m.BusinessActivities, new { @class = "control-label" })
+                        <br />
+                        @BusinessResources.LabelBusinessActivities2
+                    </td>
+                    <td>
+                        @Html.TextAreaFor(m => m.BusinessActivities, new { @class = "form-control input-sm", @rows = "5" })
+                        @Html.ValidationMessageFor(m => m.BusinessActivities, "", new { @class = "text-danger" })
+                    </td>
+                </tr>
+                <tr>
+                    <td class="fieldname">
+                        @Html.LabelFor(m => m.Management, new { @class = "control-label" })
+                        <br />
+                        @BusinessResources.LabelManagement2
+                    </td>
+                    <td>
+                        @Html.TextAreaFor(m => m.Management, new { @class = "form-control input-sm", @rows = "5" })
+                        @Html.ValidationMessageFor(m => m.Management, "", new { @class = "text-danger" })
+                    </td>
+                </tr>
+                <tr>
+                    <td class="fieldname">
+                        @Html.LabelFor(m => m.AccountStrategy, new { @class = "control-label" })
+                        <br />
+                        @BusinessResources.LabelAccountStrategy2
+                    </td>
+                    <td>
+                        @Html.TextAreaFor(m => m.AccountStrategy, new { @class = "form-control input-sm", @rows = "5" })
+                        @Html.ValidationMessageFor(m => m.AccountStrategy, "", new { @class = "text-danger" })
+                    </td>
+                </tr>
+            </table>
+        </fieldset>
+
+        <br />
+        <div class="form-group">
+            <div class="col-sm-12 text-center">
+                @Html.HiddenFor(m => m.Id)
+
+                <input type="submit" name="actionType" value="@CommonResources.ButtonSave" class="btn btn-default btn-sm" />
+            </div>
+        </div>
+    </section>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/smartlender")
+    @Scripts.Render("~/bundles/cleditor")
+
+    <script type="text/javascript">
+    $(function () {
+        $("textarea").cleditor({});
+        @if (ViewBag.DisplayMode == ClosDotNet.Helper.DisplayMode.View)
+        {
+            <text>
+            prepareCheckerMode();
+            </text>
+        }
+    });
+    </script>
+}

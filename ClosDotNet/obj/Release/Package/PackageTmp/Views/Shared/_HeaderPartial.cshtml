@@ -1,0 +1,39 @@
+﻿@using Microsoft.AspNet.Identity
+@using System.Web.Security;
+@using ClosDotNet.Resources.Resources;
+
+@if (Request.IsAuthenticated)
+{
+    <div class="navbar navbar-fixed-top banner">
+        <div class="navbar-collapse navbar-right header">
+            @User.Identity.Name
+            |
+            @(Roles.IsUserInRole("CA") ? CommonResources.RoleDescriptionCA : "")
+            @(Roles.IsUserInRole("RMTL") ? CommonResources.RoleDescriptionRMTL : "")
+            @(Roles.IsUserInRole("RM") ? CommonResources.RoleDescriptionRM : "")            
+            |
+            Version @typeof(ClosDotNet.MvcApplication).Assembly.GetName().Version
+            |
+            @DateTime.Now.ToString()
+            <br />
+
+            @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right  icon" }))
+            {
+                @Html.AntiForgeryToken()
+                <a href="javascript:document.getElementById('logoutForm').submit()">
+                    <img src="~/Resources/Images/logout.gif" />
+                </a>
+            }
+            <div class="navbar-right icon">
+                <a href="@Url.Action("Welcome", "Home")">
+                    <img src="~/Resources/Images/home.gif" />
+                </a>
+            </div>
+            <div class="navbar-right icon">
+                <a href="@Url.Action("Search", "Customer")">
+                    <img src="~/Resources/Images/search.gif" />
+                </a>
+            </div>
+        </div>
+    </div>
+}

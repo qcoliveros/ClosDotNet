@@ -1,0 +1,100 @@
+﻿@using Microsoft.AspNet.Identity
+@using System.Web.Security;
+@using ClosDotNet.Helper;
+@using ClosDotNet.Resources.Resources;
+
+@if (Request.IsAuthenticated)
+{
+    <div id="first-level-tab">
+        @if (ViewBag.ActiveMenu == "Home" || ViewBag.ActiveMenu == "TaskCreditOrigination")
+        {
+            <ul class="nav nav-tabs">
+                <li @PrintClass(ViewBag.ActiveMenu, "TaskCreditOrigination")>
+                    <a href="@Url.Action("ViewTaskCallReportList", "Task", new { viewType = "Draft" })">
+                        <span class="glyphicon glyphicon-th-list"></span> @MenuResources.CreditOriginationTask
+                    </a>
+                </li>
+            </ul>
+        }
+        
+        @if (ViewBag.ActiveMenu == "SearchCustomer")
+        {
+            <ul class="nav nav-tabs">
+                <li @PrintClass(ViewBag.ActiveMenu, "SearchCustomer")>
+                    <a href="@Url.Action("Search", "Customer")">
+                        <span class="glyphicon glyphicon-search"></span> @MenuResources.CustomerSearch
+                    </a>
+                </li>
+            </ul>
+        }
+        
+        @if (ViewBag.ActiveMenu == "Customer")
+        {
+            <ul class="nav nav-tabs">
+                <li @PrintClass(ViewBag.ActiveMenu, "Customer")>
+                    <a href="@Url.Action("ViewCustomerDetails", "Customer")">
+                        <span class="glyphicon glyphicon-user"></span> @MenuResources.Customer
+                    </a>
+                </li>
+            </ul>
+        }
+    </div>
+    
+    <div id="second-level-tab">
+        @if (ViewBag.ActiveSubMenu == "TaskCallReport")
+        {
+            <ul class="nav nav-tabs">
+                <li @PrintClass(ViewBag.ActiveSubMenu, "TaskCallReport")>
+                    <a href="@Url.Action("ViewTaskCallReportList", "Task", new { viewType = "Draft" })">
+                        <span class="glyphicon glyphicon-th-list"></span> @MenuResources.CallReport
+                    </a>
+                </li>
+            </ul>
+        }
+
+        @if (ViewBag.ActiveMenu == "Customer")
+        {
+            <ul class="nav nav-tabs">
+                <li @PrintClass(ViewBag.ActiveSubMenu, "CustomerDetails")>
+                    <a href="@Url.Action("ViewCustomerDetails", "Customer")">
+                        <span class="glyphicon glyphicon-user"></span> @MenuResources.CustomerDetails
+                    </a>
+                </li>                
+                @if (Session["SessionCustomer"] != null)
+                {
+                    <li @PrintClass(ViewBag.ActiveSubMenu, "CustomerCallReport")>
+                        <a href="@Url.Action("ViewCallReportList", "CallReport")">
+                            <span class="glyphicon glyphicon-phone"></span> @MenuResources.CallReport
+                        </a>
+                    </li>
+                }
+            </ul>
+        }
+    </div>
+    
+    <div id="third-level-tab">
+        @if (ViewBag.ActiveSubMenu == "TaskCallReport")
+        {
+            <ul class="nav nav-tabs">
+                <li @PrintClass(ViewBag.ActiveSubSubMenu, "TaskDraftCallReport")>
+                    <a href="@Url.Action("ViewTaskCallReportList", "Task", new { viewType = "Draft" })">
+                        <span class="glyphicon glyphicon-edit"></span> @MenuResources.Draft
+                    </a>
+                </li>
+                <li @PrintClass(ViewBag.ActiveSubSubMenu, "TaskSubmittedCallReport")>
+                    <a href="@Url.Action("ViewTaskCallReportList", "Task", new { viewType = "Submitted" })">
+                        <span class="glyphicon glyphicon-check"></span> @MenuResources.Submitted
+                    </a>
+                </li>
+            </ul>
+        }
+    </div>
+}
+
+@helper PrintClass(string activeMenu, string actualMenu)
+{
+    if (activeMenu == actualMenu)
+    { 
+        <text>class='active'</text>
+    }
+}

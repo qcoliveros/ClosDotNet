@@ -1,0 +1,63 @@
+﻿@using ClosDotNet.Helper;
+@using ClosDotNet.Resources.Resources;
+@using GridMvc.Html
+@using System.Linq
+
+@model IEnumerable<ClosDotNet.Models.ListCallReportViewModel>
+
+@{
+    ViewBag.Title = CallReportResources.TitleReportList;
+    ViewBag.ActiveMenu = "Customer";
+    ViewBag.ActiveSubMenu = "CustomerCallReport";
+}
+
+@Styles.Render("~/Content/gridmvc")
+
+
+<div class="row">
+    <div class="col-md-12">
+        @using (Html.BeginForm("ViewCallReport", "CallReport", new { callReportId = 0 }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+        {            
+            <table>
+                <tr>
+                    <td><h4>@CallReportResources.TitleReportList</h4></td>
+                    <td class="text-right">
+                        @if (!Roles.IsUserInRole("CA"))
+                        {
+                            <input type="submit" name="actionType" value="@CommonResources.ButtonAddNew" class="btn btn-default btn-sm" />
+                        }
+                    </td>
+                </tr>
+            </table>
+        }        
+        <hr />
+
+        @{ int rowNumber = 0; }
+        @Html.Grid(Model).Columns(columns =>
+            {
+                columns.Add().Titled(CommonResources.LabelRowNumber)
+                    .Sanitized(false).Encoded(false)
+                    .RenderValueAs(o =>
+                    {
+                        rowNumber++;
+                        return UIUtility.RenderRowNumber(Request.QueryString["grid-page"], 10, rowNumber);
+                    })
+                    .Css("index");
+                columns.Add(c => c.ReferenceNo).Titled(CallReportResources.LabelReportListRefNo)
+                    .Sanitized(false).Encoded(false)
+                    .RenderValueAs(c => Html.ActionLink(c.ReferenceNo, "ViewCallReport", new { callReportId = c.Id })
+                    .ToHtmlString());
+                columns.Add(c => c.CallPurpose).Titled(CallReportResources.LabelReportListCallPurpose);
+                columns.Add(c => c.CallDate).Titled(CallReportResources.LabelReportListCallDate);
+                columns.Add(c => c.Originator).Titled(CallReportResources.LabelReportListOriginator);
+                columns.Add(c => c.LastUpdateDate).Titled(CallReportResources.LabelReportListLastUpdatedDate);
+                columns.Add(c => c.CurrentRecipient).Titled(CallReportResources.LabelReportCurrentRecipient);
+                columns.Add(c => c.Status).Titled(CallReportResources.LabelReportListStatus);
+                columns.Add(c => c.Workflow).Titled(CallReportResources.LabelReportListWorkflow);
+            }).WithPaging(10)
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/gridmvc")
+}

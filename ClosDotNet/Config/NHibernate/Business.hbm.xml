@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2">
+
+  <class name="ClosDotNet.Domain.Business.BusinessVO, ClosDotNet" table="SML_BUSINESS">
+    <!-- BaseValueObject -->
+    <id name="Id" column="ID" unsaved-value="0">
+      <generator class="increment" />
+    </id>
+    <version name="VersionNumber" column="VERSION_TIME" />
+    <property name="CreateBy" column="CREATE_BY" />
+    <property name="CreationDate" column="CREATION_DATE" />
+    <property name="LastUpdateBy" column="LAST_UPDATE_BY" />
+    <property name="LastUpdateDate" column="LAST_UPDATE_DATE" />
+    <!-- BusinessVO -->
+    <component name="Customer" class="ClosDotNet.Domain.Customer.CustomerVO, ClosDotNet">
+      <property name="Id" column="CUSTOMER_ID" />
+    </component>
+    <component name="CurrentPaidUpCapital" class="ClosDotNet.Domain.Base.Model.AmountVO, ClosDotNet">
+      <component name="Currency" class="ClosDotNet.Domain.CodeSet.CurrencyVO, ClosDotNet">
+        <property name="Code" column="CUR_PAID_UP_CAPITAL_CCY" />
+      </component>
+      <property name="Value" column="CUR_PAID_UP_CAPITAL" />
+    </component>
+    <property name="BorrowerBackground" column="CUSTOMER_BACKGROUND" />
+    <property name="BusinessActivities" column="CUSTOMER_BUSINESS_ACTIVITY" />
+    <property name="Management" column="CUSTOMER_MANAGEMENT" />
+    <property name="AccountStrategy" column="CUSTOMER_ACCOUNT_STRATEGY" />
+  </class>
+
+</hibernate-mapping>

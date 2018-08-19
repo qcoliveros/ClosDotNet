@@ -1,0 +1,60 @@
+﻿@using ClosDotNet.Resources.Resources;
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>@ViewBag.Title - @CommonResources.ApplicationName</title>
+    
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+
+<body>
+    <table id="mainContainer">
+        <tr>
+            <td>@Html.Partial("_HeaderPartial")</td>
+        </tr>
+        <tr>
+            <td>
+                @RenderBody()
+            </td>
+        </tr>
+        <tr>
+            <td>@Html.Partial("_FooterPartial")</td>
+        </tr>
+    </table> 
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/gridmvc")
+    @Scripts.Render("~/bundles/smartlender")
+    @RenderSection("scripts", required: false)
+
+    <div class="fullscreensilk" id="fullscreensilk" style="display:none;">
+        <table style="width: 100%; height: 100%; background-color: #F5F5F5; padding: 0px; border-spacing: 0px;">
+            <tr>
+                <td align="center" valign="middle">
+                    <div class="fullscreensilk" id="fullscreensilkimage">
+                        <div id="spinLoading">
+                            <img src="~/Resources/Images/loading.gif" border="0" />
+                            <div id="loading-message" style="display: none; margin-bottom: 10px;"></div>
+                            <div id="loading-count" style="display: block; margin-bottom: 4px;"></div>
+                        </div>
+                    </div>&nbsp;
+                </td>
+            </tr>
+        </table>
+    </div>
+    <script type="text/javascript">
+        $(window).bind('beforeunload', function () {
+            setUnloadFlag();
+        });
+    </script>
+</body>
+
+</html>

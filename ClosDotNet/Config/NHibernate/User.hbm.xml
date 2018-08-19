@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2">
+  
+  <class name="ClosDotNet.Domain.User.UserVO, ClosDotNet" table="SML_USER">
+    <!-- BaseValueObject -->
+    <id name="Id" column="ID" unsaved-value="0">
+      <generator class="increment" />
+    </id>
+    <version name="VersionNumber" column="VERSION_TIME" />
+    <property name="CreateBy" column="CREATE_BY" />
+    <property name="CreationDate" column="CREATION_DATE" />
+    <property name="LastUpdateBy" column="LAST_UPDATE_BY" />
+    <property name="LastUpdateDate" column="LAST_UPDATE_DATE" />
+    <!-- DualControlledBaseValueObject -->
+    <property name="MasterId" column="MASTER_ID"/>
+    <property name="Deprecated" column="DEPRECATED"/>
+    <property name="Status" column="STATUS"/>
+    <!-- UserVO -->
+    <property name="LoginId" column="LOGIN_ID" />
+    <property name="FullName" column="FULL_NAME" />
+    <component name="Designation" class="ClosDotNet.Domain.CodeSet.CodeValueVO, ClosDotNet">
+      <property name="Id" column="DESIGNATION_ID" />
+      <property name="Code" formula="(SELECT cv.code FROM code_value cv WHERE cv.id = DESIGNATION_ID)" />
+      <property name="Description" formula="(SELECT cv.code_value FROM code_value cv WHERE cv.id = DESIGNATION_ID)" />
+    </component>
+  </class>
+  
+</hibernate-mapping>

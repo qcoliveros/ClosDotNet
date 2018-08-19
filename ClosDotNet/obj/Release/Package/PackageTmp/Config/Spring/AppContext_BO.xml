@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<objects xmlns="http://www.springframework.net">
+  
+  <!-- Task -->
+  <object id="TaskDAO" type="ClosDotNet.Domain.Task.TaskDAOImpl, ClosDotNet">
+    <property name="SessionFactory" ref="OfaSessionFactory" />
+  </object>
+  
+  <!-- Common Code -->
+  <object id="CodeValueADO" type="ClosDotNet.Domain.CodeSet.CodeValueADOImpl, ClosDotNet">
+    <property name="DbProvider" ref="OfaDatabaseProvider" />
+  </object>
+  
+  <object id="CountryDAO" type="ClosDotNet.Domain.CodeSet.CountryDAOImpl, ClosDotNet">
+    <property name="SessionFactory" ref="OfaSessionFactory" />
+  </object>
+  
+  <object id="CommonCodeBO" type="ClosDotNet.Domain.CodeSet.CommonCodeBOImpl, ClosDotNet">
+    <property name="CountryDAO" ref="CountryDAO" />
+    <property name="CodeValueADO" ref="CodeValueADO" />
+  </object>
+  
+  <!-- User -->
+  <object id="UserDAO" type="ClosDotNet.Domain.User.UserDAOImpl, ClosDotNet">
+    <property name="SessionFactory" ref="OfaSessionFactory" />
+  </object>
+  
+  <!-- Customer -->
+  <object id="CustomerDAO" type="ClosDotNet.Domain.Customer.CustomerDAOImpl, ClosDotNet">
+    <property name="SessionFactory" ref="OfaSessionFactory" />
+  </object>
+  
+  <object id="CustomerBO" type="ClosDotNet.Domain.Customer.CustomerBOImpl, ClosDotNet">
+    <property name="CustomerDAO" ref="CustomerDAO" />
+    <property name="UserDAO" ref="UserDAO" />
+  </object>
+  
+  <!-- Call Report -->
+  <object id="CallReportDAO" type="ClosDotNet.Domain.CallReport.CallReportDAOImpl, ClosDotNet">
+    <property name="SessionFactory" ref="OfaSessionFactory" />
+  </object>
+  
+  <object id="CallReportADO" type="ClosDotNet.Domain.CallReport.CallReportADOImpl, ClosDotNet">
+    <property name="DbProvider" ref="OfaDatabaseProvider" />
+  </object>
+  
+  <object id="CallReportTaskManager" type="ClosDotNet.Domain.CallReport.CallReportTaskManager, ClosDotNet">
+    <property name="UserDAO" ref="UserDAO" />
+    <property name="TaskDAO" ref="TaskDAO" />
+    <property name="CallReportDAO" ref="CallReportDAO" />
+    <property name="CallReportADO" ref="CallReportADO" />
+    <property name="WorkflowManager" ref="OptimaJetWorkflowManager" />
+  </object>
+  
+  <!-- Workflow -->
+</objects>

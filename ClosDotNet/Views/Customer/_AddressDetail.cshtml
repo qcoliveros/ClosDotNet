@@ -1,0 +1,134 @@
+﻿@using ClosDotNet.Resources.Resources;
+
+@model ClosDotNet.Models.AddressDetailViewModel
+
+@Html.HiddenFor(m => m.Id)
+@Html.HiddenFor(m => m.CustomerId)
+@Html.HiddenFor(m => m.AddressType)
+<table class="table table-bordered table-condensed" style="margin-bottom: 0px;">
+    <tr>
+        <td class="fieldname">
+            @Html.LabelFor(m => m.AddressFormat, new { @class = "control-label" })
+        </td>
+        <td class="fieldvalue-inner">
+            @Html.DropDownListFor(
+                m => m.AddressFormat,
+                (IList<SelectListItem>) ViewContext.Controller.ViewBag.AddressFormatList,
+                CommonResources.OptionPleaseSelect,
+                new { @class = "form-control input-sm" })
+            @Html.ValidationMessageFor(m => m.AddressFormat, "", new { @class = "text-danger" })
+        </td>
+    </tr>
+    <tr>
+        <td class="fieldname">
+            @Html.LabelFor(m => m.StructuredBlock, new { @class = "control-label" })
+        </td>
+        <td>
+            @Html.TextBoxFor(m => m.StructuredBlock, new { @class = "form-control input-sm" })
+            @Html.ValidationMessageFor(m => m.StructuredBlock, "", new { @class = "text-danger" })
+        </td>
+    </tr>
+    <tr>
+        <td class="fieldname">
+            @Html.LabelFor(m => m.StructuredStreet, new { @class = "control-label" })
+        </td>
+        <td>
+            @Html.TextBoxFor(m => m.StructuredStreet, new { @class = "form-control input-sm" })
+            @Html.ValidationMessageFor(m => m.StructuredStreet, "", new { @class = "text-danger" })
+        </td>
+    </tr>
+    <tr>
+        <td class="fieldname">
+            @Html.LabelFor(m => m.StructuredStorey, new { @class = "control-label" })
+        </td>
+        <td>
+            @Html.TextBoxFor(m => m.StructuredStorey, new { @class = "form-control input-sm" })
+            @Html.ValidationMessageFor(m => m.StructuredStorey, "", new { @class = "text-danger" })
+        </td>
+    </tr>
+    <tr>
+        <td class="fieldname">
+            @Html.LabelFor(m => m.StructuredUnit, new { @class = "control-label" })
+        </td>
+        <td>
+            @Html.TextBoxFor(m => m.StructuredUnit, new { @class = "form-control input-sm" })
+            @Html.ValidationMessageFor(m => m.StructuredUnit, "", new { @class = "text-danger" })
+        </td>
+    </tr>
+    <tr>
+        <td class="fieldname">
+            @Html.LabelFor(m => m.StructuredBuilding, new { @class = "control-label" })
+        </td>
+        <td>
+            @Html.TextBoxFor(m => m.StructuredBuilding, new { @class = "form-control input-sm" })
+            @Html.ValidationMessageFor(m => m.StructuredBuilding, "", new { @class = "text-danger" })
+        </td>
+    </tr>
+    <tr>
+        <td class="fieldname">
+            @Html.LabelFor(m => m.StructuredCity, new { @class = "control-label" })
+        </td>
+        <td>
+            @Html.TextBoxFor(m => m.StructuredCity, new { @class = "form-control input-sm" })
+            @Html.ValidationMessageFor(m => m.StructuredCity, "", new { @class = "text-danger" })
+        </td>
+    </tr>
+    <tr>
+        <td class="fieldname">
+            @Html.LabelFor(m => m.StructuredPostalCode, new { @class = "control-label" })
+        </td>
+        <td>
+            @Html.TextBoxFor(m => m.StructuredPostalCode, new { @class = "form-control input-sm" })
+            @Html.ValidationMessageFor(m => m.StructuredPostalCode, "", new { @class = "text-danger" })
+        </td>
+    </tr>
+    <tr>
+        <td class="fieldname">
+            @Html.LabelFor(m => m.StructuredCountry, new { @class = "control-label" })
+        </td>
+        <td>
+            @Html.DropDownListFor(
+                m => m.StructuredCountry,
+                (IList<SelectListItem>)ViewContext.Controller.ViewBag.CountryList,
+                CommonResources.OptionPleaseSelect,
+                new { @class = "form-control input-sm" })
+            @Html.ValidationMessageFor(m => m.StructuredCountry, "", new { @class = "text-danger" })
+        </td>
+    </tr>
+    <tr>
+        <td class="fieldname">
+            @Html.LabelFor(m => m.StructuredPoBox, new { @class = "control-label" })
+        </td>
+        <td width="34%">
+            @Html.TextBoxFor(m => m.StructuredPoBox, new { @class = "form-control input-sm" })
+            @Html.ValidationMessageFor(m => m.StructuredPoBox, "", new { @class = "text-danger" })
+        </td>
+    </tr>
+    <tr>
+        <td class="fieldname" rowspan="4">
+            @Html.LabelFor(m => m.UnstructuredAddress1, new { @class = "control-label" })
+        </td>
+        <td>
+            @Html.TextBoxFor(m => m.UnstructuredAddress1, new { @class = "form-control input-sm" })
+            @Html.ValidationMessageFor(m => m.UnstructuredAddress1, "", new { @class = "text-danger" })
+        </td>
+    </tr>
+    <tr>
+        <td>
+            @Html.TextBoxFor(m => m.UnstructuredAddress2, new { @class = "form-control input-sm" })
+            @Html.ValidationMessageFor(m => m.UnstructuredAddress2, "", new { @class = "text-danger" })
+        </td>
+    </tr>
+    <tr>
+        <td>
+            @Html.TextBoxFor(m => m.UnstructuredAddress3, new { @class = "form-control input-sm" })
+            @Html.ValidationMessageFor(m => m.UnstructuredAddress3, "", new { @class = "text-danger" })
+        </td>
+    </tr>
+    <tr>
+        <td>
+            @Html.TextBoxFor(m => m.UnstructuredAddress4, new { @class = "form-control input-sm" })
+            @Html.ValidationMessageFor(m => m.UnstructuredAddress4, "", new { @class = "text-danger" })
+        </td>
+    </tr>
+</table>

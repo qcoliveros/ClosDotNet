@@ -1,0 +1,172 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2">
+  
+  <class name="ClosDotNet.Domain.Customer.CustomerVO, ClosDotNet" table="SML_CUSTOMER">
+    <id name="Id" column="ID" unsaved-value="0">
+      <generator class="increment" />
+    </id>
+    <version name="VersionNumber" column="VERSION_TIME" />
+    <property name="CreateBy" column="CREATE_BY" />
+    <property name="CreationDate" column="CREATION_DATE" />
+    <property name="LastUpdateBy" column="LAST_UPDATE_BY" />
+    <property name="LastUpdateDate" column="LAST_UPDATE_DATE" />
+    <property name="BorrowerStatus" column="STATUS" />
+    <property name="BackendInd" column="BACKEND_IND" />
+    <property name="CustomerType" column="CUSTOMER_TYPE" />
+    <property name="CustomerName" column="CUSTOMER_NAME" />
+    <property name="PreviousCustomerName" column="OLD_CUSTOMER_NAME" />
+    <property name="CifNumber" column="CIF_NUMBER" />
+    <component name="IdType" class="ClosDotNet.Domain.CodeSet.CodeValueVO, ClosDotNet">
+      <property name="Id" column="ID_TYPE_ID" />
+      <property name="Code" formula="(SELECT cv.code FROM code_value cv WHERE cv.id = ID_TYPE_ID)" />
+      <property name="Description" formula="(SELECT cv.code_value FROM code_value cv WHERE cv.id = ID_TYPE_ID)" />
+    </component>
+    <property name="IdNumber" column="ID_NUMBER" />
+    <component name="IdIssuedCountry" class="ClosDotNet.Domain.CodeSet.CountryVO, ClosDotNet">
+      <property name="Code" column="ID_COUNTRY" />
+      <property name="Description" formula="(SELECT sc.ctr_cntry_name FROM sci_country sc WHERE sc.ctr_cntry_iso_code = ID_COUNTRY)" />
+    </component>
+    <component name="Classification" class="ClosDotNet.Domain.CodeSet.CodeValueVO, ClosDotNet">
+      <property name="Id" column="CLASSIFICATION_ID" />
+      <property name="Code" formula="(SELECT cv.code FROM code_value cv WHERE cv.id = CLASSIFICATION_ID)" />
+      <property name="Description" formula="(SELECT cv.code_value FROM code_value cv WHERE cv.id = CLASSIFICATION_ID)" />
+    </component>
+    <property name="AccountOpenedDate" column="ACC_CREATED_DATE" />
+    <property name="RelationshipSince" column="RELATIONSHIP_SINCE_YEAR" />
+    <property name="FacilityGrantedDate" column="FACILITY_GRANTED_DATE" />
+    <property name="HoldMailInd" column="HOLD_MAIL_IND" />
+    <bag name="AddressList" lazy="false" fetch="select" cascade="all-delete-orphan" inverse="true">
+      <key column="CUSTOMER_ID" />
+      <one-to-many class="ClosDotNet.Domain.Customer.AddressVO, ClosDotNet" />
+    </bag>
+    <component name="RelationshipManager" class="ClosDotNet.Domain.User.UserVO, ClosDotNet">
+      <property name="Id" column="RM_ID" />
+      <property name="FullName" formula="(SELECT su.full_name FROM sml_user su WHERE su.id = RM_ID)" />
+    </component>
+
+    <joined-subclass name="ClosDotNet.Domain.Customer.CompanyCustomerVO, ClosDotNet" table="SML_COMPANY_CUSTOMER"
+      lazy="false" dynamic-insert="true" dynamic-update="true">
+      <key column="ID" on-delete="noaction" />
+      <property name="CreateBy" column="CREATE_BY" />
+      <property name="CreationDate" column="CREATION_DATE" />
+      <property name="LastUpdateBy" column="LAST_UPDATE_BY" />
+      <property name="LastUpdateDate" column="LAST_UPDATE_DATE" />
+      <component name="Constitution" class="ClosDotNet.Domain.CodeSet.CodeValueVO, ClosDotNet">
+        <property name="Id" column="BORROWER_TYPE_ID" />
+        <property name="Code" formula="(SELECT cv.code FROM code_value cv WHERE cv.id = BORROWER_TYPE_ID)" />
+        <property name="Description" formula="(SELECT cv.code_value FROM code_value cv WHERE cv.id = BORROWER_TYPE_ID)" />
+      </component>
+      <property name="MandatoryInfoNotAvailableInd" column="MANDATORY_INFO_UNAVAIL_IND" />
+      <component name="IncorporationCountry" class="ClosDotNet.Domain.CodeSet.CountryVO, ClosDotNet">
+        <property name="Code" column="INCORPORATION_COUNTRY" />
+        <property name="Description" formula="(SELECT sc.ctr_cntry_name FROM sci_country sc WHERE sc.ctr_cntry_iso_code = INCORPORATION_COUNTRY)" />
+      </component>
+      <property name="IncorporationDate" column="INCORPORATION_DATE" />
+      <component name="BusinessOperationCountry" class="ClosDotNet.Domain.CodeSet.CountryVO, ClosDotNet">
+        <property name="Code" column="OPERATION_COUNTRY" />
+        <property name="Description" formula="(SELECT sc.ctr_cntry_name FROM sci_country sc WHERE sc.ctr_cntry_iso_code = OPERATION_COUNTRY)" />
+      </component>
+      <property name="MoreThan50TurnoverInd" column="MORE_THAN_50_PRCT_TURNOVR_IND" />
+    </joined-subclass>
+
+    <joined-subclass name="ClosDotNet.Domain.Customer.IndividualCustomerVO, ClosDotNet" table="SML_INDIVIDUAL_CUSTOMER"
+      lazy="false" dynamic-insert="true" dynamic-update="true">
+      <key column="ID" on-delete="noaction" />
+      <property name="CreateBy" column="CREATE_BY" />
+      <property name="CreationDate" column="CREATION_DATE" />
+      <property name="LastUpdateBy" column="LAST_UPDATE_BY" />
+      <property name="LastUpdateDate" column="LAST_UPDATE_DATE" />
+      <property name="WithBankSinceDate" column="WITH_BANK_SINCE_DATE" />
+      <property name="FirstCreditGrantedDate" column="FIRST_CREDIT_GRANTED_DATE" />
+      <component name="Salutation" class="ClosDotNet.Domain.CodeSet.CodeValueVO, ClosDotNet">
+        <property name="Id" column="SALUTATION_ID" />
+        <property name="Code" formula="(SELECT cv.code FROM code_value cv WHERE cv.id = SALUTATION_ID)" />
+        <property name="Description" formula="(SELECT cv.code_value FROM code_value cv WHERE cv.id = SALUTATION_ID)" />
+      </component>
+      <component name="PreviousSalutation" class="ClosDotNet.Domain.CodeSet.CodeValueVO, ClosDotNet">
+        <property name="Id" column="OLD_SALUTATION_ID" />
+        <property name="Code" formula="(SELECT cv.code FROM code_value cv WHERE cv.id = OLD_SALUTATION_ID)" />
+        <property name="Description" formula="(SELECT cv.code_value FROM code_value cv WHERE cv.id = OLD_SALUTATION_ID)" />
+      </component>
+      <component name="Gender" class="ClosDotNet.Domain.CodeSet.CodeValueVO, ClosDotNet">
+        <property name="Id" column="GENDER_ID" />
+        <property name="Code" formula="(SELECT cv.code FROM code_value cv WHERE cv.id = GENDER_ID)" />
+        <property name="Description" formula="(SELECT cv.code_value FROM code_value cv WHERE cv.id = GENDER_ID)" />
+      </component>
+      <component name="MaritalStatus" class="ClosDotNet.Domain.CodeSet.CodeValueVO, ClosDotNet">
+        <property name="Id" column="MARITAL_STATUS_ID" />
+        <property name="Code" formula="(SELECT cv.code FROM code_value cv WHERE cv.id = MARITAL_STATUS_ID)" />
+        <property name="Description" formula="(SELECT cv.code_value FROM code_value cv WHERE cv.id = MARITAL_STATUS_ID)" />
+      </component>
+      <property name="BirthDate" column="DATE_OF_BIRTH" />
+      <property name="DependentCount" column="NO_OF_DEPENDENTS" />
+      <component name="Nationality" class="ClosDotNet.Domain.CodeSet.CountryVO, ClosDotNet">
+        <property name="Code" column="COUNTRY_OF_CITIZENSHIP" />
+        <property name="Description" formula="(SELECT sc.ctr_cntry_name FROM sci_country sc WHERE sc.ctr_cntry_iso_code = COUNTRY_OF_CITIZENSHIP)" />
+      </component>
+      <component name="ResidentCountry" class="ClosDotNet.Domain.CodeSet.CountryVO, ClosDotNet">
+        <property name="Code" column="COUNTRY_OF_RESIDENCY" />
+        <property name="Description" formula="(SELECT sc.ctr_cntry_name FROM sci_country sc WHERE sc.ctr_cntry_iso_code = COUNTRY_OF_RESIDENCY)" />
+      </component>
+      <property name="PermanentResidentInd" column="PR_STATUS" />
+      <component name="Race" class="ClosDotNet.Domain.CodeSet.CodeValueVO, ClosDotNet">
+        <property name="Id" column="RACE_ID" />
+        <property name="Code" formula="(SELECT cv.code FROM code_value cv WHERE cv.id = RACE_ID)" />
+        <property name="Description" formula="(SELECT cv.code_value FROM code_value cv WHERE cv.id = RACE_ID)" />
+      </component>
+      <component name="HighestEducation" class="ClosDotNet.Domain.CodeSet.CodeValueVO, ClosDotNet">
+        <property name="Id" column="HIGHEST_EDUCATION_ID" />
+        <property name="Code" formula="(SELECT cv.code FROM code_value cv WHERE cv.id = HIGHEST_EDUCATION_ID)" />
+        <property name="Description" formula="(SELECT cv.code_value FROM code_value cv WHERE cv.id = HIGHEST_EDUCATION_ID)" />
+      </component>
+    </joined-subclass>
+  </class>
+
+  <class name="ClosDotNet.Domain.Customer.AddressVO, ClosDotNet" table="SML_ADDRESS">
+    <!-- BaseValueObject -->
+    <id name="Id" column="ID" unsaved-value="0">
+      <generator class="increment" />
+    </id>
+    <version name="VersionNumber" column="VERSION_TIME" />
+    <property name="CreateBy" column="CREATE_BY" />
+    <property name="CreationDate" column="CREATION_DATE" />
+    <property name="LastUpdateBy" column="LAST_UPDATE_BY" />
+    <property name="LastUpdateDate" column="LAST_UPDATE_DATE" />
+    <!-- AddressVO -->
+    <many-to-one name="Customer" class="ClosDotNet.Domain.Customer.CustomerVO, ClosDotNet" column="CUSTOMER_ID" />
+    <property name="AddressType" column="ADDR_TYPE" />
+    <component name="AddressFormat" class="ClosDotNet.Domain.CodeSet.CodeValueVO, ClosDotNet">
+      <property name="Id" column="STR_ADDRESS_FORMAT_ID" />
+      <property name="Code" formula="(SELECT cv.code FROM code_value cv WHERE cv.id = STR_ADDRESS_FORMAT_ID)" />
+      <property name="Description" formula="(SELECT cv.code_value FROM code_value cv WHERE cv.id = STR_ADDRESS_FORMAT_ID)" />
+    </component>
+    <property name="StructuredBlock" column="STR_BLOCK" />
+    <property name="StructuredStreet" column="STR_STREET" />
+    <property name="StructuredStorey" column="STR_STOREY" />
+    <property name="StructuredUnit" column="STR_UNIT" />
+    <property name="StructuredBuilding" column="STR_BUILDING" />
+    <property name="StructuredCity" column="STR_STATE" />
+    <property name="StructuredPostalCode" column="STR_ZIP_CODE" />
+    <component name="StructuredCountry" class="ClosDotNet.Domain.CodeSet.CountryVO, ClosDotNet">
+      <property name="Code" column="STR_COUNTRY" />
+      <property name="Description" formula="(SELECT sc.ctr_cntry_name FROM sci_country sc WHERE sc.ctr_cntry_iso_code = STR_COUNTRY)" />
+    </component>
+    <property name="StructuredPoBox" column="STR_BOX" />
+    <property name="UnstructuredAddress1" column="UNSTR_ADDR_1" />
+    <property name="UnstructuredAddress2" column="UNSTR_ADDR_2" />
+    <property name="UnstructuredAddress3" column="UNSTR_ADDR_3" />
+    <property name="UnstructuredAddress4" column="UNSTR_ADDR_4" />
+    <component name="ResidentialOwnershipType" class="ClosDotNet.Domain.CodeSet.CodeValueVO, ClosDotNet">
+      <property name="Id" column="RES_OWNERSHIP_ID" />
+      <property name="Code" formula="(SELECT cv.code FROM code_value cv WHERE cv.id = RES_OWNERSHIP_ID)" />
+      <property name="Description" formula="(SELECT cv.code_value FROM code_value cv WHERE cv.id = RES_OWNERSHIP_ID)" />
+    </component>
+    <component name="ResidentialType" class="ClosDotNet.Domain.CodeSet.CodeValueVO, ClosDotNet">
+      <property name="Id" column="RES_TYPE_ID" />
+      <property name="Code" formula="(SELECT cv.code FROM code_value cv WHERE cv.id = RES_TYPE_ID)" />
+      <property name="Description" formula="(SELECT cv.code_value FROM code_value cv WHERE cv.id = RES_TYPE_ID)" />
+    </component>
+    <property name="ResidentialStayStartYear" column="RES_SINCE_YEAR" />
+  </class>
+  
+</hibernate-mapping>

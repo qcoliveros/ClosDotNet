@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<objects xmlns="http://www.springframework.net"
+	       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns:tx="http://www.springframework.net/tx"
+         xmlns:db="http://www.springframework.net/database"
+         xmlns:aop="http://www.springframework.net/aop"
+         xsi:schemaLocation="http://www.springframework.net http://www.springframework.net/schema/objects/spring-objects.xsd
+             http://www.springframework.net/schema/tx http://www.springframework.net/schema/tx/spring-tx-1.1.xsd
+             http://www.springframework.net/schema/db http://www.springframework.net/schema/db/spring-database.xsd
+             http://www.springframework.net/schema/aop http://www.springframework.net/schema/aop/spring-aop-1.1.xsd">
+  
+  <db:provider id="OfaDatabaseProvider"               
+      connectionString="${DefaultConnection.connectionString}" 
+      provider="${DefaultConnection.providerName}" />
+  
+  <object type="Spring.Objects.Factory.Config.VariablePlaceholderConfigurer, Spring.Core">
+    <property name="VariableSources">
+      <list>
+        <object type="Spring.Objects.Factory.Config.ConnectionStringsVariableSource, Spring.Core"/>
+      </list>
+    </property>
+  </object>
+  
+  <object id="OfaSessionFactory" type="ClosDotNet.Domain.Base.ORM.DualMappingLocalSessionFactoryObject, ClosDotNet">
+    <property name="DbProvider" ref="OfaDatabaseProvider"/>
+    <property name="MappingAssemblies">
+      <list>
+        <value>ClosDotNet</value>
+      </list>
+    </property>
+    <property name="ClassMappingAssemblies">
+      <list>
+        <value>NHibernate.AspNet.Identity</value>
+      </list>
+    </property>
+    <property name="HibernateProperties">
+      <dictionary>
+        <entry key="hibernate.connection.provider" value="NHibernate.Connection.DriverConnectionProvider"/>
+        <entry key="dialect" value="NHibernate.Dialect.MsSql2008Dialect"/>
+        <entry key="connection.driver_class" value="NHibernate.Driver.SqlClientDriver"/>
+        <entry key="use_proxy_validator" value="false" />
+        <entry key="show_sql" value="true" />
+      </dictionary>
+    </property>
+    <property name="ExposeTransactionAwareSessionFactory" value="true" />
+  </object>  
+  
+  <object id="OfaTransactionManager" type="Spring.Data.NHibernate.HibernateTransactionManager, Spring.Data.NHibernate4">
+    <property name="DbProvider" ref="OfaDatabaseProvider"/>
+    <property name="SessionFactory" ref="OfaSessionFactory" />
+  </object>
+  
+  <object id="ServiceOperation" type="Spring.Aop.Support.SdkRegularExpressionMethodPointcut, Spring.Aop">
+    <property name="pattern" value="ClosDotNet.Domain.*"/>
+  </object>
+  
+  <tx:attribute-driven transaction-manager="OfaTransactionManager" />
+  
+  <tx:advice id="TransactionAdvice" transaction-manager="OfaTransactionManager">
+    <tx:attributes>
+      <tx:method name="Retrieve*" read-only="true" />
+      <tx:method name="*" />
+    </tx:attributes>
+  </tx:advice>
+  
+  <aop:config>
+    <aop:advisor pointcut-ref="ServiceOperation" advice-ref="TransactionAdvice" />
+  </aop:config>
+  
+</objects>

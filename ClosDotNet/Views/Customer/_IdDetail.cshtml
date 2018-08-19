@@ -1,0 +1,41 @@
+﻿@using ClosDotNet.Resources.Resources;
+
+@model ClosDotNet.Models.CustomerViewModel
+
+<table class="table table-bordered table-condensed" style="margin-bottom: 0px;">
+    <tr>
+        <td class="fieldname">
+            @Html.LabelFor(m => m.IdType, new { @class = "control-label" })
+        </td>
+        <td class="fieldvalue-inner">
+            @Html.DropDownListFor(
+                m => m.IdType,
+                (IList<SelectListItem>)ViewBag.IdTypeList,
+                CommonResources.OptionPleaseSelect,
+                new { @class = "form-control input-sm" })
+            @Html.ValidationMessageFor(m => m.IdType, "", new { @class = "text-danger" })
+        </td>
+    </tr>
+    <tr>
+        <td class="fieldname">
+            @Html.LabelFor(m => m.IdNumber, new { @class = "control-label" })
+        </td>
+        <td>
+            @Html.TextBoxFor(m => m.IdNumber, new { @class = "form-control input-sm" })
+            @Html.ValidationMessageFor(m => m.IdNumber, "", new { @class = "text-danger" })
+        </td>
+    </tr>
+    <tr>
+        <td class="fieldname">
+            @Html.LabelFor(m => m.IdIssuedCountry, new { @class = "control-label" })
+        </td>
+        <td>
+            @Html.DropDownListFor(
+                m => m.IdIssuedCountry,
+                (IList<SelectListItem>) ViewBag.CountryList,
+                CommonResources.OptionPleaseSelect,
+                new { @class = "form-control input-sm" })
+            @Html.ValidationMessageFor(m => m.IdIssuedCountry, "", new { @class = "text-danger" })
+        </td>
+    </tr>
+</table>

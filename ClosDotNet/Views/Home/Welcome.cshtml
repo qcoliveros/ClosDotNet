@@ -1,0 +1,97 @@
+﻿@using ClosDotNet.Helper;
+@using ClosDotNet.Resources.Resources;
+
+@model ClosDotNet.Models.TaskCountViewModel
+
+@{
+    Layout = "~/Views/Shared/_LayoutWoContainer.cshtml";
+    
+    ViewBag.Title = CommonResources.MessageWelcome;
+    ViewBag.ActiveMenu = "Home";
+}
+
+<div class="welcome">
+    <table>
+        <tr>
+            <td width="50%">&nbsp;</td>
+            <td width="25%">
+                <table class="table table-bordered table-condensed table-hover" style="padding-top: 20px;">
+                    <thead>
+                        <tr>
+                            <th>@MenuResources.CreditOriginationTask</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                @MenuResources.Drafts
+                                <span class="pull-right">@Model.OriginationDraftCount</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                @MenuResources.PendingApproval
+                                <span class="pull-right">@Model.OriginationPendingApprovalCount</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                @MenuResources.PendingMyApproval
+                                <span class="pull-right">@Model.OriginationPendingMyApprovalCount</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                @MenuResources.Return
+                                <span class="pull-right">@Model.OriginationReturnedCount</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                @MenuResources.ApprovedDeclined
+                                <span class="pull-right">@Model.OriginationProcessedCount</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                @MenuResources.EnquiryReceived
+                                <span class="pull-right">@Model.EnquiryReceivedCount</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                @MenuResources.EnquiryReplied
+                                <span class="pull-right">@Model.EnquiryRepliedCount</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                @MenuResources.EnquiryPendingRecipient
+                                <span class="pull-right">@Model.EnquiryPendingRecipientCount</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                @Html.ActionLink(MenuResources.CallReportAll, "ViewTaskCallReportList", "Task", new { viewType = TaskViewType.Draft }, null)
+                                <span class="pull-right">@Model.CallReportRecordCount</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                @MenuResources.TermSheetDrafts
+                                <span class="pull-right">@Model.TermSheetDraftCount</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                @MenuResources.TermSheetPendingMyApproval
+                                <span class="pull-right">@Model.TermSheetPendingMyApprovalCount</span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </td>
+            <td width="25%">&nbsp;</td>
+        </tr>
+    </table>
+</div>

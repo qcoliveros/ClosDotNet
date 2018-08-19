@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2">
+  
+  <class name="ClosDotNet.Domain.CallReport.CallReportVO, ClosDotNet" table="SML_CUST_CALL_REPORT">
+    <!-- BaseValueObject -->
+    <id name="Id" column="ID" unsaved-value="0">
+      <generator class="increment" />
+    </id>
+    <version name="VersionNumber" column="VERSION_TIME" />
+    <property name="CreateBy" column="CREATE_BY" />
+    <property name="CreationDate" column="CREATION_DATE" />
+    <property name="LastUpdateBy" column="LAST_UPDATE_BY" />
+    <property name="LastUpdateDate" column="LAST_UPDATE_DATE" />
+    <!-- DualControlledBaseValueObject -->
+    <property name="MasterId" column="MASTER_ID"/>
+    <!-- CallReportVO -->
+    <component name="Customer" class="ClosDotNet.Domain.Customer.CustomerVO, ClosDotNet">
+      <property name="Id" column="CUSTOMER_ID" />
+      <property name="CustomerName" formula="(SELECT sc.customer_name FROM sml_customer sc WHERE sc.id = CUSTOMER_ID)" />
+      <property name="CustomerType" formula="(SELECT sc.customer_type FROM sml_customer sc WHERE sc.id = CUSTOMER_ID)" />
+    </component>
+    <property name="ReferenceNo" column="REF_NO" />
+    <property name="PreviousCallDate" column="PREVIOUS_CALL_DATE" />
+    <property name="CallDate" column="DATE_OF_CALL" />
+    <property name="SiteVisitDate" column="SITE_VISIT_DATE" />
+    <property name="ContactMode" column="MODE_OF_CONTACT" />
+    <component name="CallPurpose" class="ClosDotNet.Domain.CodeSet.CodeValueVO, ClosDotNet">
+      <property name="Id" column="PURPOSE_OF_CALL_ID" />
+      <property name="Code" formula="(SELECT cv.code FROM code_value cv WHERE cv.id = PURPOSE_OF_CALL_ID)" />
+      <property name="Description" formula="(SELECT cv.code_value FROM code_value cv WHERE cv.id = PURPOSE_OF_CALL_ID)" />
+    </component>
+    <property name="Purpose" column="PURPOSE" />
+    <property name="Attendees" column="ATTENDEES" />
+    <property name="FollowUp" column="FOLLOW_UP" />
+    <component name="Owner" class="ClosDotNet.Domain.User.UserVO, ClosDotNet">
+      <property name="Id" column="OWNER_ID" />
+      <property name="LoginId" formula="(SELECT su.login_id FROM sml_user su WHERE su.id = OWNER_ID)" />
+    </component>
+    <component name="Reviewer" class="ClosDotNet.Domain.User.UserVO, ClosDotNet">
+      <property name="Id" column="REVIEWER_ID" />
+      <property name="LoginId" formula="(SELECT su.login_id FROM sml_user su WHERE su.id = OWNER_ID)" />
+    </component>
+    <property name="Remarks" column="REMARKS" />
+    <component name="CurrentRecipient" class="ClosDotNet.Domain.User.UserVO, ClosDotNet">
+      <property name="LoginId" formula="(
+          SELECT su.login_id FROM sml_user su WHERE su.id = (
+            SELECT st.current_owner_id FROM sml_task st WHERE st.workflow_type = 'CALL_REPORT_TRX' AND st.reference_id = ID)
+        )" />
+    </component>
+    <property name="TaskStatus" formula="(
+          SELECT st.task_status FROM sml_task st WHERE st.workflow_type = 'CALL_REPORT_TRX' AND st.reference_id = ID
+        )" />
+    <property name="WorkflowProcessId" formula="(
+          SELECT st.workflow_process_id FROM sml_task st WHERE st.workflow_type = 'CALL_REPORT_TRX' AND st.reference_id = ID
+        )" />
+  </class>
+  
+</hibernate-mapping>

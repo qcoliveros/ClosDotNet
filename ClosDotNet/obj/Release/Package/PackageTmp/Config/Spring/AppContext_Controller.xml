@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<objects xmlns="http://www.springframework.net">
+  
+  <object id="AccountController" type="ClosDotNet.Controllers.AccountController, ClosDotNet" singleton="false">
+    <constructor-arg name="SessionFactory" ref="OfaSessionFactory" />
+  </object>
+
+  <object id="TaskController" type="ClosDotNet.Controllers.TaskController, ClosDotNet" singleton="false">
+    <property name="CallReportTaskManager" ref="CallReportTaskManager" />
+    <property name="CallReportMapper" ref="CallReportMapper" />
+  </object>
+  
+  <object id="CustomerController" type="ClosDotNet.Controllers.CustomerController, ClosDotNet" singleton="false">
+    <property name="CommonCodeBO" ref="CommonCodeBO" />
+    <property name="CustomerBO" ref="CustomerBO" />
+    <property name="Mapper" ref="CustomerMapper" />
+  </object>
+  
+  <object id="CallReportController" type="ClosDotNet.Controllers.CallReportController, ClosDotNet" singleton="false">
+    <property name="CommonCodeBO" ref="CommonCodeBO" />
+    <property name="CustomerBO" ref="CustomerBO" />
+    <property name="TaskManager" ref="CallReportTaskManager" />
+    <property name="Mapper" ref="CallReportMapper" />
+  </object>
+
+</objects>
